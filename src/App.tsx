@@ -117,7 +117,7 @@ export default function App() {
           </header>
           <div className="about-body">
             <p>
-              Trabajo como arquitecto de software y también enseño, administro y participo como catequista.
+              Trabajo como arquitecto de software, enseño y participo como catequista.
               Me gusta explicar lo que construyo: cada port que publico lleva su estado real, las
               pruebas hechas y lo que todavía no funciona.
             </p>

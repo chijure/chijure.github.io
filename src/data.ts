@@ -11,7 +11,7 @@ export type Item = {
 export const profile = {
   name: 'Jhuan Reategui Solis',
   handle: 'chijure',
-  roles: ['Arquitecto de software', 'Docente', 'Administrador', 'Catequista'],
+  roles: ['Arquitecto de software', 'Docente', 'Catequista'],
   intro:
     'Diseño y construyo software, y en mis ratos libres devuelvo la vida a celulares ' +
     'antiguos: ports de CyanogenMod, recoveries, kernels e ingeniería inversa de bootloaders.',
