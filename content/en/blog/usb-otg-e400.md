@@ -3,12 +3,11 @@ title: "USB OTG on the LG L3 (E400): host mode with a software switch"
 date: 2026-11-01
 description: "The L3's stock kernel already had the USB host. What was missing was mounting the disk and a switch to force host mode, because the micro-USB ID pin does not reach the processor."
 tags: [android, usb, e400]
-draft: true
+draft: false
 ---
 
 On the **LG Optimus L3 (E400)** running CyanogenMod 7, a flash drive plugged in through USB OTG works: it mounts by itself and can be read from the phone. This is what it took, compared with the [C660]({{< relref "usb-otg-c660.md" >}}), where there was no way.
 
-<!-- PHOTO 1: the phone with the adapter and the flash drive connected -->
 
 ## What the phone already had
 
@@ -21,7 +20,6 @@ LG's 2.6.38 kernel already includes the host controller (`msm_hsusb_host.0`), `u
 
 The kernel accepts the mode in `/sys/kernel/debug/otg/mode`. I tied it to a system property (`sys.otg.mode`) through `init.e0.rc`, and wrote a small app, **OtgSwitch**, with a button that flips it between `host` and `peripheral`. It runs as the system user because only that user may write the property.
 
-<!-- PHOTO 2: screenshot of the OtgSwitch app -->
 
 ## How to use it
 
@@ -34,8 +32,6 @@ The kernel accepts the mode in `/sys/kernel/debug/otg/mode`. I tied it to a syst
 
 A **90° micro-USB OTG adapter** ([Mercado Libre listing](https://www.mercadolibre.com.pe/adaptador-micro-usb-otg-90-grados-derecho/up/MPEU2463941096)).
 
-<!-- PHOTO 3: the adapter -->
-<!-- TO COMPLETE: how the flash drive was powered (the phone does not supply 5 V) -->
 
 ## Limits
 

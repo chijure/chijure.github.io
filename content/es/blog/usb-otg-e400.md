@@ -3,12 +3,11 @@ title: "USB OTG en el LG L3 (E400): modo host con un interruptor de software"
 date: 2026-11-01
 description: "El kernel stock del L3 ya traía el host USB. Faltaba montar el disco y un interruptor para forzar el modo host, porque el pin ID del micro-USB no llega al procesador."
 tags: [android, usb, e400]
-draft: true
+draft: false
 ---
 
 En el **LG Optimus L3 (E400)** con CyanogenMod 7, un pendrive conectado por USB OTG funciona: se monta solo y se lee desde el teléfono. Esto es lo que hizo falta, y lo contrasto con el [C660]({{< relref "usb-otg-c660.md" >}}), donde no hubo manera.
 
-<!-- FOTO 1: el teléfono con el adaptador y el pendrive conectados -->
 
 ## Lo que ya traía el teléfono
 
@@ -21,7 +20,6 @@ El kernel 2.6.38 de LG ya incluye el controlador host (`msm_hsusb_host.0`), `usb
 
 El kernel acepta el modo en `/sys/kernel/debug/otg/mode`. Lo conecté a una propiedad del sistema (`sys.otg.mode`) mediante `init.e0.rc`, y escribí una pequeña app, **OtgSwitch**, con un botón que la cambia entre `host` y `peripheral`. Se ejecuta con el usuario del sistema porque solo él puede escribir esa propiedad.
 
-<!-- FOTO 2: captura de la app OtgSwitch -->
 
 ## Cómo se usa
 
@@ -34,8 +32,6 @@ El kernel acepta el modo en `/sys/kernel/debug/otg/mode`. Lo conecté a una prop
 
 Un adaptador **micro-USB OTG en ángulo de 90°** ([ficha en Mercado Libre](https://www.mercadolibre.com.pe/adaptador-micro-usb-otg-90-grados-derecho/up/MPEU2463941096)).
 
-<!-- FOTO 3: el adaptador -->
-<!-- COMPLETAR: cómo se alimentó el pendrive (el teléfono no da 5 V) -->
 
 ## Límites
 
