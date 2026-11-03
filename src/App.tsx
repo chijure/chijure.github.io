@@ -144,9 +144,6 @@ export default function App() {
             <a className="btn" href={profile.org} target="_blank" rel="noopener noreferrer">
               {strings.ctaAndroid[lang]}
             </a>
-            <a className="btn" href={profile.web} target="_blank" rel="noopener noreferrer">
-              {strings.ctaWeb[lang]}
-            </a>
           </div>
         </section>
 

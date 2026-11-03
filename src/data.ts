@@ -21,7 +21,6 @@ export const profile = {
   name: 'Jhuan Reategui Solis',
   handle: 'chijure',
   github: me,
-  web: 'https://www.reateguisolisjm.com',
   org,
 };
 
@@ -47,7 +46,6 @@ export const strings = {
   },
   ctaGithub: { es: 'GitHub', en: 'GitHub' },
   ctaAndroid: { es: 'Proyectos Android', en: 'Android projects' },
-  ctaWeb: { es: 'Sitio personal', en: 'Personal site' },
   tagsLabel: { es: 'Tecnologías', en: 'Technologies' },
   aboutTitle: { es: 'Perfil', en: 'About' },
   aboutText: {
