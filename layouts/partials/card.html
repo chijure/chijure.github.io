@@ -1,0 +1,16 @@
+{{- $lang := site.Language.Lang }}
+<li class="card">
+  <div class="card-head">
+    <h3>{{ .name }}</h3>
+    {{- with .status }}<span class="status">{{ index . $lang }}</span>{{ end }}
+  </div>
+  <p>{{ index .summary $lang }}</p>
+  <ul class="tags" aria-label="{{ i18n "tagsLabel" }}">
+    {{- range .tags }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  <div class="links">
+    {{- range .links }}
+    <a href="{{ .href }}" target="_blank" rel="noopener noreferrer">{{ if reflect.IsMap .label }}{{ index .label $lang }}{{ else }}{{ .label }}{{ end }}</a>
+    {{- end }}
+  </div>
+</li>

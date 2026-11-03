@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{{ site.Title }}</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+  <script>
+    // Raíz del sitio: idioma elegido antes, o el del navegador (inglés si no es español).
+    (function () {
+      var target = '{{ .Permalink }}';
+      try {
+        var lang = localStorage.getItem('lang') || (navigator.language || '').slice(0, 2);
+        if (lang !== 'es') target = target.replace('/es/', '/en/');
+      } catch (e) {}
+      location.replace(target + location.hash);
+    })();
+  </script>
+</head>
+<body><p><a href="{{ .Permalink }}">{{ .Permalink }}</a></p></body>
+</html>

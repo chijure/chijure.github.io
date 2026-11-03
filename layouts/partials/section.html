@@ -1,0 +1,9 @@
+<section id="{{ .id }}" aria-labelledby="{{ .id }}-title">
+  <header class="section-head">
+    <h2 id="{{ .id }}-title">{{ i18n (printf "section_%s_title" .id) }}</h2>
+    <p>{{ i18n (printf "section_%s_lead" .id) }}</p>
+  </header>
+  <ul class="grid">
+    {{- range .items }}{{ partial "card.html" . }}{{ end }}
+  </ul>
+</section>

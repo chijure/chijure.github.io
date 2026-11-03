@@ -1,0 +1,15 @@
+<li class="post-item">
+  <article>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
+      · {{ .ReadingTime }} {{ i18n "min_read" }}
+    </p>
+    {{- with .Description }}<p>{{ . }}</p>{{ end }}
+    {{- with .Params.tags }}
+    <ul class="tags" aria-label="{{ i18n "tagsLabel" }}">
+      {{- range . }}<li><a href="{{ (printf "tags/%s" (. | urlize)) | relLangURL }}/">{{ . }}</a></li>{{ end }}
+    </ul>
+    {{- end }}
+  </article>
+</li>

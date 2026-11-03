@@ -1,0 +1,12 @@
+{{ define "main" }}
+<section class="blog" aria-labelledby="blog-title">
+  <header class="section-head page-head">
+    <h1 id="blog-title">{{ i18n "blog_title" }}</h1>
+    <p>{{ i18n "blog_lead" }}</p>
+    {{- with .OutputFormats.Get "RSS" }}<p><a href="{{ .RelPermalink }}">{{ i18n "rss" }}</a></p>{{ end }}
+  </header>
+  <ul class="post-list">
+    {{- range .Pages }}{{ partial "post-item.html" . }}{{ end }}
+  </ul>
+</section>
+{{ end }}

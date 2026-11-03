@@ -1,0 +1,21 @@
+{{ define "main" }}
+<article class="post">
+  <p class="back"><a href="{{ "blog/" | relLangURL }}">{{ i18n "back_to_blog" }}</a></p>
+  <header class="post-head">
+    <h1>{{ .Title }}</h1>
+    <p class="meta">
+      {{ i18n "published_on" }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
+      · {{ .ReadingTime }} {{ i18n "min_read" }}
+    </p>
+    {{- with .Params.tags }}
+    <ul class="tags" aria-label="{{ i18n "tagsLabel" }}">
+      {{- range . }}<li><a href="{{ (printf "tags/%s" (. | urlize)) | relLangURL }}/">{{ . }}</a></li>{{ end }}
+    </ul>
+    {{- end }}
+  </header>
+  <div class="prose">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

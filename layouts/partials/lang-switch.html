@@ -1,0 +1,16 @@
+{{- $page := . }}
+<div class="lang" role="group" aria-label="{{ i18n "langLabel" }}">
+  {{- range hugo.Sites }}
+  {{- $l := .Language }}
+  {{- if eq $l.Lang site.Language.Lang }}
+  <span class="current" aria-current="true" lang="{{ $l.Locale }}" title="{{ $l.Label }}">{{ upper $l.Lang }}</span>
+  {{- else }}
+  {{- $href := "" }}
+  {{- range $page.AllTranslations }}
+  {{- if eq .Language.Lang $l.Lang }}{{ $href = .RelPermalink }}{{ end }}
+  {{- end }}
+  {{- if not $href }}{{ $href = printf "/%s/" $l.Lang }}{{ end }}
+  <a href="{{ $href }}" hreflang="{{ $l.Locale }}" lang="{{ $l.Locale }}" title="{{ $l.Label }}" aria-label="{{ $l.Label }}" data-lang="{{ $l.Lang }}">{{ upper $l.Lang }}</a>
+  {{- end }}
+  {{- end }}
+</div>

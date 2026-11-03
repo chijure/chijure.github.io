@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{- $data := hugo.Data.projects }}
+{{- $blog := site.GetPage "/blog" }}
+<section id="inicio" class="hero" aria-labelledby="hero-title">
+  <p class="eyebrow">{{ i18n "roles" }}</p>
+  <h1 id="hero-title">Jhuan Reategui Solis</h1>
+  <p class="intro">{{ i18n "intro" }}</p>
+  <div class="cta">
+    <a class="btn primary" href="{{ site.Params.github }}" target="_blank" rel="noopener noreferrer">{{ i18n "ctaGithub" }}</a>
+    <a class="btn" href="{{ site.Params.org }}" target="_blank" rel="noopener noreferrer">{{ i18n "ctaAndroid" }}</a>
+  </div>
+</section>
+
+{{ partial "section.html" (dict "id" "android" "items" $data.android) }}
+{{ partial "section.html" (dict "id" "tools" "items" $data.tools) }}
+{{ partial "section.html" (dict "id" "research" "items" $data.research) }}
+{{ partial "section.html" (dict "id" "software" "items" $data.software) }}
+
+{{- if and $blog $blog.RegularPages }}
+<section id="blog" aria-labelledby="blog-title">
+  <header class="section-head">
+    <h2 id="blog-title">{{ i18n "latest_posts" }}</h2>
+  </header>
+  <ul class="post-list">
+    {{- range first 3 $blog.RegularPages }}{{ partial "post-item.html" . }}{{ end }}
+  </ul>
+  <p class="more"><a href="{{ $blog.RelPermalink }}">{{ i18n "all_posts" }}</a></p>
+</section>
+{{- end }}
+
+<section id="perfil" aria-labelledby="perfil-title" class="about">
+  <header class="section-head">
+    <h2 id="perfil-title">{{ i18n "aboutTitle" }}</h2>
+  </header>
+  <div class="about-body">
+    <p>{{ i18n "aboutText" }}</p>
+    <h3>{{ i18n "skillsTitle" }}</h3>
+    <ul class="chips" aria-label="{{ i18n "skillsLabel" }}">
+      {{- range $data.skills }}<li>{{ . }}</li>{{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}

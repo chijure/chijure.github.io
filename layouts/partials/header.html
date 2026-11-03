@@ -1,0 +1,18 @@
+{{- $home := "/" | relLangURL }}
+{{- $blog := site.GetPage "/blog" }}
+<header class="topbar">
+  <a class="brand" href="{{ $home }}" aria-label="{{ i18n "home" }}"><span aria-hidden="true">&gt;_</span> chijure</a>
+  <nav aria-label="{{ i18n "mainNav" }}">
+    <ul>
+      <li><a href="{{ $home }}#android">{{ i18n "nav_android" }}</a></li>
+      <li><a href="{{ $home }}#tools">{{ i18n "section_tools_title" }}</a></li>
+      <li><a href="{{ $home }}#research">{{ i18n "nav_research" }}</a></li>
+      <li><a href="{{ $home }}#software">{{ i18n "nav_software" }}</a></li>
+      <li><a href="{{ $home }}#perfil">{{ i18n "aboutTitle" }}</a></li>
+      {{- if and $blog $blog.RegularPages }}
+      <li><a href="{{ $blog.RelPermalink }}">{{ i18n "nav_blog" }}</a></li>
+      {{- end }}
+    </ul>
+  </nav>
+  {{- partial "lang-switch.html" . }}
+</header>

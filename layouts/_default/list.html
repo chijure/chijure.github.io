@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="blog" aria-labelledby="list-title">
+  <header class="section-head page-head">
+    <h1 id="list-title">{{ if eq .Kind "term" }}{{ i18n "tagged" }}: {{ .Title }}{{ else }}{{ .Title }}{{ end }}</h1>
+  </header>
+  <ul class="post-list">
+    {{- range .Pages }}{{ partial "post-item.html" . }}{{ end }}
+  </ul>
+</section>
+{{ end }}

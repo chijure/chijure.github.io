@@ -1,0 +1,15 @@
+<footer>
+  <p>© {{ now.Year }} Jhuan Reategui Solis · <a href="{{ site.Params.github }}" target="_blank" rel="noopener noreferrer">github.com/chijure</a></p>
+  {{- $blog := site.GetPage "/blog" }}
+  {{- if and $blog $blog.RegularPages }}
+  {{- with $blog.OutputFormats.Get "RSS" }}<p><a href="{{ .RelPermalink }}">{{ i18n "rss" }}</a></p>{{ end }}
+  {{- end }}
+</footer>
+<script>
+  // Recuerda el idioma elegido para la redirección de la raíz del sitio.
+  document.querySelectorAll('.lang a[data-lang]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { localStorage.setItem('lang', a.dataset.lang); } catch (e) {}
+    });
+  });
+</script>

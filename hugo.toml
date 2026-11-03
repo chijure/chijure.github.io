@@ -1,0 +1,44 @@
+baseURL = 'https://chijure.github.io/'
+title = 'Jhuan Reategui Solis'
+enableRobotsTXT = true
+timeZone = 'America/Lima'
+
+# Español por defecto; cada idioma en su carpeta (/es/ y /en/).
+defaultContentLanguage = 'es'
+defaultContentLanguageInSubdir = true
+
+[languages]
+  [languages.es]
+    locale = 'es'
+    label = 'Español'
+    weight = 1
+    contentDir = 'content/es'
+  [languages.en]
+    locale = 'en'
+    label = 'English'
+    weight = 2
+    contentDir = 'content/en'
+
+[params]
+  github = 'https://github.com/chijure'
+  org = 'https://github.com/chijure-android-system-development'
+
+[taxonomies]
+  tag = 'tags'
+
+# RSS solo en las secciones (el blog), no en la portada.
+[outputs]
+  home = ['HTML']
+  section = ['HTML', 'RSS']
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    guessSyntax = false
+  [markup.goldmark.renderer]
+    unsafe = false
+
+[sitemap]
+  changeFreq = 'monthly'
+  priority = 0.5
