@@ -976,5 +976,19 @@
    "slub",
    "kernel"
   ]
+ },
+ "hal": {
+  "term": {
+   "es": "HAL (capa de abstracción de hardware)",
+   "en": "HAL (hardware abstraction layer)"
+  },
+  "def": {
+   "es": "La pieza de Android que traduce entre la API genérica del sistema y el hardware concreto de un teléfono (cámara, sensores, radio). Cada fabricante o cada port escribe la suya.",
+   "en": "The piece of Android that translates between the system's generic API and a phone's actual hardware (camera, sensors, radio). Each vendor or port writes its own."
+  },
+  "see": [
+   "kernel",
+   "donor"
+  ]
  }
 }
