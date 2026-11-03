@@ -3,7 +3,7 @@ title: "USB OTG on the LG C660: what I measured and why it does not work"
 date: 2026-11-02
 description: "I enabled the USB host stack in the 2.6.35 kernel, forced host mode and measured the PHY. With a flash drive and with a mouse, the D+ and D- lines never move."
 tags: [android, kernel, usb]
-draft: true
+draft: false
 ---
 
 On the LG L3 (E400), USB host mode worked with a powered OTG adapter, so I tried the same on the **LG Optimus Pro C660**. It does not work, and this is what I measured to be sure.

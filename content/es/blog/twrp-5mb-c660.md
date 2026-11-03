@@ -3,7 +3,7 @@ title: "TWRP en una partición de 5 MB: el LG C660"
 date: 2026-11-02
 description: "La partición de recovery del C660 mide 5 MB. Así quedó TWRP 3.1.1 en 4,35 MB, con adb, sideload y almacenamiento USB."
 tags: [android, twrp, kernel]
-draft: true
+draft: false
 ---
 
 La partición `recovery` del **LG Optimus Pro C660** es una MTD de solo `0x500000` bytes (5 MB). Con el kernel de la recovery original (3,2 MB) TWRP no cabe, así que hubo que adelgazar el kernel.
