@@ -28,6 +28,13 @@ docker run --rm -u $(id -u):$(id -g) -e HOME=/tmp -v "$PWD":/app -w /app node:20
 `.github/workflows/deploy.yml` compila y publica en Pages en cada push a `main`.
 En el repositorio: Settings → Pages → Source: **GitHub Actions**.
 
+Al crear un repositorio `usuario.github.io`, GitHub activa Pages por **rama** y publica el
+código sin compilar (página en blanco: `/src/main.tsx` no existe como JS). Hay que cambiar
+la fuente a GitHub Actions antes del primer push (o con
+`gh api -X PUT repos/<usuario>/<repo>/pages -f build_type=workflow`) y, si ya se
+publicó mal, lanzar `gh workflow run deploy.yml`. La CDN guarda la página 10 minutos:
+probar con Ctrl+Shift+R.
+
 ## Para añadir un proyecto
 
 Agregar un objeto a la lista que corresponda en `src/data.ts`
