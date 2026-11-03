@@ -990,5 +990,61 @@
    "kernel",
    "donor"
   ]
+ },
+ "ion": {
+  "term": {
+   "es": "ION",
+   "en": "ION"
+  },
+  "def": {
+   "es": "Asignador de memoria compartida del kernel Linux para buffers que usan a la vez la CPU, la GPU, la cámara y el códec de video. En los teléfonos Qualcomm antiguos lo reemplazó a PMEM.",
+   "en": "The Linux kernel's allocator for shared memory used at once by the CPU, GPU, camera and video codec. On older Qualcomm phones it replaced PMEM."
+  },
+  "see": [
+   "pmem",
+   "gralloc"
+  ]
+ },
+ "pmem": {
+  "term": {
+   "es": "PMEM",
+   "en": "PMEM"
+  },
+  "def": {
+   "es": "Reserva de memoria contigua que los kernels Qualcomm antiguos (2.6.x) daban a la pantalla, la cámara y el audio. Los HAL de esa época esperan sus dispositivos `/dev/pmem*`.",
+   "en": "Contiguous memory pool that older Qualcomm kernels (2.6.x) gave to display, camera and audio. HALs from that era expect its `/dev/pmem*` devices."
+  },
+  "see": [
+   "ion",
+   "hal"
+  ]
+ },
+ "oncrpc": {
+  "term": {
+   "es": "ONCRPC",
+   "en": "ONCRPC"
+  },
+  "def": {
+   "es": "Llamadas a procedimiento remoto con las que el procesador de aplicaciones y el módem de un chip Qualcomm MSM se piden cosas entre sí (hora, audio, GPS, datos de operador). Cada servicio es un número de programa.",
+   "en": "Remote procedure calls an application processor and the modem of a Qualcomm MSM chip use to ask each other for things (time, audio, GPS, carrier data). Each service is a program number."
+  },
+  "see": [
+   "amss",
+   "kernel"
+  ]
+ },
+ "amss": {
+  "term": {
+   "es": "AMSS",
+   "en": "AMSS"
+  },
+  "def": {
+   "es": "El firmware del módem de los chips Qualcomm MSM. Corre en su propio procesador y, si algo le llega mal desde Android, reinicia todo el chip sin dejar ningún registro.",
+   "en": "The modem firmware of Qualcomm MSM chips. It runs on its own processor and, if Android sends it something wrong, resets the whole chip without leaving any log."
+  },
+  "see": [
+   "oncrpc",
+   "watchdog"
+  ]
  }
 }

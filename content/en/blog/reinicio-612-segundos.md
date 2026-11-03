@@ -6,6 +6,8 @@ tags: [android, kernel, e400]
 draft: false
 ---
 
+> **Update, 3 November 2026:** this reboot stopped happening after restoring the phone's full factory firmware (modem and NV included), with the same 3.4 kernel. So the conclusion below, "it is not the modem", was too strong. I tell the story in [Kernel 3.4 for the LG L3]({{< relref "kernel-34-lg-l3.md" >}}).
+
 Porting {{< g "cm" >}} 10.1 to the **LG Optimus L3 (E400)** with a 3.4 {{< g "kernel" >}} (instead of the 2.6.38 that already worked) brought a failure I had not seen before: the phone reboots on its own, with no {{< g "panic" >}} and no oops in the log, almost always between **609 and 616 seconds** of uptime. It happens even at full idle, with the screen off. After the reboot, the bootloader comes up in charging mode.
 
 ## The result that pins it down

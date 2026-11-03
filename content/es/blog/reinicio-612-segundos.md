@@ -6,6 +6,8 @@ tags: [android, kernel, e400]
 draft: false
 ---
 
+> **Actualización del 3 de noviembre de 2026:** este reinicio dejó de ocurrir tras restaurar el firmware de fábrica completo del teléfono (módem y NV incluidos), con el mismo kernel 3.4. Así que la conclusión de abajo, "no es el módem", era demasiado fuerte. Lo cuento en [Kernel 3.4 para el LG L3]({{< relref "kernel-34-lg-l3.md" >}}).
+
 Portar {{< g "cm" >}} 10.1 al **LG Optimus L3 (E400)** con un {{< g "kernel" >}} 3.4 (en vez del 2.6.38 que ya tenía andando) trajo un fallo que no había visto antes: el teléfono se reinicia solo, sin ningún {{< g "panic" >}} ni *oops* en el log, casi siempre entre los **609 y los 616 segundos** de actividad. Pasa incluso en reposo total, con la pantalla apagada. Después del reinicio, el bootloader arranca en modo carga.
 
 ## El resultado que lo acota
