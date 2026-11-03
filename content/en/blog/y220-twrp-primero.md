@@ -6,36 +6,36 @@ tags: [android, kernel, y220, twrp]
 draft: false
 ---
 
-The **Huawei Ascend Y220-U05** uses a MediaTek **MT6572** and ships with Android 2.3.6 (build `C482B206SP05`). For the CyanogenMod port I needed my own kernel, and the starting point was a **donor** tree from Longcheer for Jelly Bean (`lcsh72_we_jb3`): a Linux 3.4.5 with MediaTek support (its history shows it imported from a Lenovo project in 2014).
+The **Huawei Ascend Y220-U05** uses a MediaTek **{{< g "mt6572" "MT6572" >}}** and ships with Android 2.3.6 (build `C482B206SP05`). For the {{< g "cm" "CyanogenMod" >}} port I needed my own {{< g "kernel" "kernel" >}}, and the starting point was a **donor** tree from Longcheer for Jelly Bean (`lcsh72_we_jb3`): a Linux 3.4.5 with MediaTek support (its history shows it imported from a Lenovo project in 2014).
 
 This is the first of two articles. Here I tell **how I tested it without risking the phone's system**; the [second]({{< relref "kernel-y220.md" >}}) has the actual kernel fixes.
 
 ## Starting point: there are no sources
 
-Huawei never published the kernel source code for the Y220. Linux is GPL, so that code should be obtainable, but for this model I found nothing: not published by Huawei and not in community repositories. I did not find another hobbyist's tree to use as a base either.
+Huawei never published the kernel source code for the Y220. Linux is {{< g "gpl" "GPL" >}}, so that code should be obtainable, but for this model I found nothing: not published by Huawei and not in community repositories. I did not find another hobbyist's tree to use as a base either.
 
-What I did have was the phone, its stock firmware and the binary kernel it ships with. That changed everything:
+What I did have was the phone, its {{< g "stock" "stock" >}} firmware and the binary kernel it ships with. That changed everything:
 
-- **A donor tree.** I had to start from the kernel of *another* phone with the same processor (MT6572), which is not the Y220 and does not match its panel, memory or sensors.
+- **A {{< g "donor" "donor tree" >}}.** I had to start from the kernel of *another* phone with the same processor (MT6572), which is not the Y220 and does not match its panel, memory or sensors.
 - **The stock kernel as a reference.** Whenever the donor did something differently, I compared it with what the original does: I captured the partitions, properties and `dmesg` from the stock phone and **disassembled the stock kernel image** to see which registers it writes, for example when starting the camera sensor.
 - **A lot of trial and error.** Without sources there is no manual: every fix comes from comparing behaviour with the original device. That is why I needed to test kernels without risking the system.
 
 ## First in TWRP, not on the ROM
 
-Before touching the phone's Android I wanted a place where a bad kernel would cost nothing. The answer was **TWRP**. The Y220 has two 6 MB partitions, `boot` (`mtd7`) and `recovery` (`mtd8`). I tried the first kernels as *recovery*: a TWRP with the new kernel, written to `mtd8`, while the stock Android stayed untouched in `boot`. If the kernel did not boot, the phone kept its system and going back meant writing another image to recovery. (The first images of this series, from 7 and 8 October, are recoveries.)
+Before touching the phone's Android I wanted a place where a bad kernel would cost nothing. The answer was **{{< g "twrp" "TWRP" >}}**. The Y220 has two 6 MB partitions, `boot` (`mtd7`) and `recovery` (`mtd8`). I tried the first kernels as *{{< g "recovery" "recovery" >}}*: a TWRP with the new kernel, written to `mtd8`, while the stock Android stayed untouched in `boot`. If the kernel did not boot, the phone kept its system and going back meant writing another image to recovery. (The first images of this series, from 7 and 8 October, are recoveries.)
 
 Building that test bench was work in itself:
 
-- **A TWRP tree for the Y220** (8 October). The MTK headers come from `mtkbootimg --mtk 1`, and `system`, `data` and `cache` are UBIFS: `ubiattach` mounts them in the stock boot order (`mtd14`, `mtd16`, `mtd15`).
+- **A TWRP tree for the Y220** (8 October). The MTK headers come from `mtkbootimg --mtk 1`, and `system`, `data` and `cache` are {{< g "ubifs" "UBIFS" >}}: `ubiattach` mounts them in the stock boot order (`mtd14`, `mtd16`, `mtd15`).
 - **An exact 6 MiB limit.** TWRP had to be pruned (only the `en` and `es` languages, no `sgdisk`) and the kernel has to be small. Today the image with kernel `#92` sits 38 KB under the limit.
 - **A way of writing that is not obvious.** `dd` to `mtdblock8` only *erases* the partition; you erase with `mtderase` and write with `nandwrite` on `/dev/mtd/mtd8`, and never on `mtd7`.
-- **A safety net.** The phone exposes no fastboot. If something broke outside the recovery, the way out was SP Flash Tool v5 on the preloader (never v6, and never *Format All*).
+- **A safety net.** The phone exposes no {{< g "fastboot" "fastboot" >}}. If something broke outside the recovery, the way out was {{< g "sp-flash-tool" "SP Flash Tool" >}} v5 on the {{< g "preloader" "preloader" >}} (never v6, and never *Format All*).
 
 The first kernels made clear why that route was worth it:
 
 - **`#7`** booted, but the msg2133 touch controller failed with `I2C transfer error` and the touch screen never appeared.
 - **`#16`** recognised the panel, but had no capacitive keys.
-- **`#59`** (9 October) was a full rebuild with the system configuration: it keeps the key lines (Menu, Home and Back) and the button backlight on GPIO 141. It is the kernel I pinned in TWRP.
+- **`#59`** (9 October) was a full rebuild with the system configuration: it keeps the key lines (Menu, Home and Back) and the button backlight on {{< g "gpio" "GPIO" >}} 141. It is the kernel I pinned in TWRP.
 
 The conclusion is written in the tree's README: **never drop an untested system kernel into the recovery**. A bad `boot` experiment must not take the recovery down with it, so the recovery keeps a known kernel (first `#59`, then `#92`) and that is what remains to rescue the phone.
 

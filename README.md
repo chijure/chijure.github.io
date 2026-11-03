@@ -62,6 +62,22 @@ código sin compilar. Cambiar la fuente a GitHub Actions (o
 `gh api -X PUT repos/<usuario>/<repo>/pages -f build_type=workflow`) y, si ya se publicó mal,
 lanzar `gh workflow run deploy.yml`. La CDN guarda cada página 10 minutos: probar con Ctrl+Shift+R.
 
+## Glosario
+
+Las definiciones viven en `data/glossary.json` (una entrada por término, con `term`, `def` en `es` y `en`,
+`see` con los identificadores de términos relacionados y, si la inicial lleva tilde, `sortkey`). La página
+sale sola en `/es/glosario/` y `/en/glossary/`, con índice por letras y anclas por término.
+
+En un artículo se enlaza la **primera mención** con el *shortcode*:
+
+```
+{{< g "ubifs" >}}                  → texto del glosario
+{{< g "ubifs" "el sistema UBIFS" >}} → texto propio
+```
+
+El enlace sale con subrayado punteado y la definición como ayuda. Un identificador que no existe hace
+fallar la compilación, así no quedan enlaces rotos. No se enlazan términos dentro de bloques de código.
+
 ## Proyectos de la portada
 
 Editar `data/projects.json`: cada proyecto lleva `summary` (y `status` opcional) como

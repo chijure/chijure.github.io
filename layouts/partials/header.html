@@ -12,6 +12,7 @@
       {{- if and $blog $blog.RegularPages }}
       <li><a href="{{ $blog.RelPermalink }}">{{ i18n "nav_blog" }}</a></li>
       {{- end }}
+      <li><a href="{{ printf "/%s/" (i18n "glossary_slug") | relLangURL }}">{{ i18n "nav_glossary" }}</a></li>
     </ul>
   </nav>
   {{- partial "lang-switch.html" . }}

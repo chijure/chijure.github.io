@@ -1,0 +1,980 @@
+{
+ "adb": {
+  "term": {
+   "es": "ADB",
+   "en": "ADB"
+  },
+  "def": {
+   "es": "Android Debug Bridge: herramienta de línea de comandos para hablar con un teléfono por USB o por red. Sirve para copiar archivos, abrir una terminal e instalar aplicaciones.",
+   "en": "Android Debug Bridge: a command-line tool to talk to a phone over USB or the network. It copies files, opens a shell and installs apps."
+  },
+  "see": [
+   "sideload",
+   "recovery"
+  ]
+ },
+ "atag": {
+  "term": {
+   "es": "ATAG",
+   "en": "ATAG"
+  },
+  "def": {
+   "es": "Lista de parámetros (memoria, línea de comandos, modo de arranque, dirección del logo…) que el bootloader entrega al kernel al arrancar en procesadores ARM.",
+   "en": "List of parameters (memory, command line, boot mode, logo address…) that the bootloader hands to the kernel at boot on ARM processors."
+  },
+  "see": [
+   "bootloader",
+   "lk"
+  ]
+ },
+ "bcb": {
+  "term": {
+   "es": "BCB",
+   "en": "BCB"
+  },
+  "def": {
+   "es": "Boot Control Block: zona de la partición `misc` donde Android y el recovery se dejan órdenes, por ejemplo «arrancar en recovery la próxima vez».",
+   "en": "Boot Control Block: an area of the `misc` partition where Android and the recovery leave each other commands, such as \"boot into recovery next time\"."
+  },
+  "see": [
+   "recovery"
+  ]
+ },
+ "boot-partition": {
+  "term": {
+   "es": "Partición boot",
+   "en": "Boot partition"
+  },
+  "def": {
+   "es": "Partición de la memoria que guarda el kernel y el ramdisk con los que arranca Android. Es distinta de la partición de recovery.",
+   "en": "Flash partition that holds the kernel and ramdisk Android boots with. It is separate from the recovery partition."
+  },
+  "see": [
+   "ramdisk",
+   "recovery",
+   "kernel"
+  ]
+ },
+ "bootloader": {
+  "term": {
+   "es": "Bootloader",
+   "en": "Bootloader"
+  },
+  "def": {
+   "es": "Primer programa que corre al encender el teléfono: inicializa lo básico, carga el kernel y se lo pasa.",
+   "en": "The first program that runs when the phone is switched on: it sets up the basics, loads the kernel and hands over to it."
+  },
+  "see": [
+   "lk",
+   "preloader",
+   "atag"
+  ]
+ },
+ "bpp": {
+  "term": {
+   "es": "bpp (bits por píxel)",
+   "en": "bpp (bits per pixel)"
+  },
+  "def": {
+   "es": "Profundidad de color de una imagen. 16 bpp usa 2 bytes por píxel (RGB565); 32 bpp usa 4 (8 bits por canal y transparencia).",
+   "en": "Colour depth of an image. 16 bpp uses 2 bytes per pixel (RGB565); 32 bpp uses 4 (8 bits per channel plus alpha)."
+  },
+  "see": [
+   "framebuffer",
+   "vram"
+  ]
+ },
+ "ccci": {
+  "term": {
+   "es": "CCCI",
+   "en": "CCCI"
+  },
+  "def": {
+   "es": "Interfaz de comunicación entre el procesador de aplicaciones y el módem en los chips MediaTek. En Android se carga como módulos del kernel.",
+   "en": "Interface between the application processor and the modem on MediaTek chips. On Android it is loaded as kernel modules."
+  },
+  "see": [
+   "mt6572",
+   "kernel"
+  ]
+ },
+ "cm": {
+  "term": {
+   "es": "CyanogenMod (CM)",
+   "en": "CyanogenMod (CM)"
+  },
+  "def": {
+   "es": "ROM comunitaria basada en el código abierto de Android, hoy discontinuada (la continúa LineageOS). CM7 es Android 2.3 y CM10 es Android 4.1/4.2.",
+   "en": "Community ROM built from Android's open source code, now discontinued (LineageOS continues it). CM7 is Android 2.3 and CM10 is Android 4.1/4.2."
+  },
+  "see": [
+   "rom",
+   "gingerbread"
+  ]
+ },
+ "debugfs": {
+  "term": {
+   "es": "debugfs",
+   "en": "debugfs"
+  },
+  "def": {
+   "es": "Sistema de archivos virtual del kernel (en `/sys/kernel/debug`) que expone ajustes y datos de depuración. En el OTG sirve para forzar el modo host.",
+   "en": "Virtual kernel filesystem (at `/sys/kernel/debug`) that exposes debugging settings and data. For OTG it is used to force host mode."
+  },
+  "see": [
+   "kernel",
+   "host-mode"
+  ]
+ },
+ "device-tree": {
+  "term": {
+   "es": "Árbol del dispositivo (device tree)",
+   "en": "Device tree"
+  },
+  "def": {
+   "es": "En el mundo de las ROMs, la carpeta con la configuración de un modelo concreto: particiones, `init.rc`, archivos de arranque. No es el *device tree* binario (DTB) del kernel.",
+   "en": "In the ROM world, the folder holding one model's configuration: partitions, `init.rc`, boot files. It is not the kernel's binary device tree (DTB)."
+  },
+  "see": [
+   "donor",
+   "rom"
+  ],
+  "sortkey": {
+   "es": "arbol del dispositivo"
+  }
+ },
+ "dmesg": {
+  "term": {
+   "es": "dmesg",
+   "en": "dmesg"
+  },
+  "def": {
+   "es": "Comando que muestra el registro de mensajes del kernel. Es la primera herramienta para diagnosticar fallos de hardware o de arranque.",
+   "en": "Command that prints the kernel message log. It is the first tool for diagnosing hardware or boot failures."
+  },
+  "see": [
+   "kernel",
+   "last-kmsg"
+  ]
+ },
+ "donor": {
+  "term": {
+   "es": "Árbol donante",
+   "en": "Donor tree"
+  },
+  "def": {
+   "es": "Kernel o árbol de fuentes de *otro* modelo con el mismo procesador, que se usa como base cuando no hay fuentes del modelo propio.",
+   "en": "Kernel or source tree of *another* model with the same processor, used as a base when the source for your own model is not available."
+  },
+  "see": [
+   "kernel",
+   "stock",
+   "gpl"
+  ],
+  "sortkey": {
+   "es": "arbol donante"
+  }
+ },
+ "dsi-dbi": {
+  "term": {
+   "es": "DSI y DBI",
+   "en": "DSI and DBI"
+  },
+  "def": {
+   "es": "Dos interfaces con las que el procesador envía la imagen al panel. DSI es serie y de alta velocidad; DBI es paralela y más simple. La señal TE (*tearing effect*) indica cuándo refrescar sin cortes.",
+   "en": "Two interfaces the processor uses to send the image to the panel. DSI is serial and fast; DBI is parallel and simpler. The TE (tearing effect) signal says when it is safe to refresh without tearing."
+  },
+  "see": [
+   "esd",
+   "framebuffer"
+  ]
+ },
+ "ehci": {
+  "term": {
+   "es": "EHCI",
+   "en": "EHCI"
+  },
+  "def": {
+   "es": "Enhanced Host Controller Interface: estándar del controlador USB 2.0 en modo host. El kernel lo implementa como un driver.",
+   "en": "Enhanced Host Controller Interface: the USB 2.0 host controller standard. The kernel implements it as a driver."
+  },
+  "see": [
+   "host-mode",
+   "otg",
+   "phy"
+  ]
+ },
+ "emmc": {
+  "term": {
+   "es": "eMMC",
+   "en": "eMMC"
+  },
+  "def": {
+   "es": "Memoria flash con controlador integrado que se ve como un disco (`mmcblk`). No es lo mismo que la NAND cruda, que gestiona el propio kernel.",
+   "en": "Flash memory with a built-in controller that shows up as a disk (`mmcblk`). It is not the same as raw NAND, which the kernel itself manages."
+  },
+  "see": [
+   "nand",
+   "mtd"
+  ]
+ },
+ "esd": {
+  "term": {
+   "es": "ESD (recuperación)",
+   "en": "ESD recovery"
+  },
+  "def": {
+   "es": "Rutina del driver de pantalla que reinicializa el panel si detecta que se bloqueó por una descarga electrostática.",
+   "en": "Display driver routine that re-initialises the panel if it detects it locked up after an electrostatic discharge."
+  },
+  "see": [
+   "dsi-dbi"
+  ]
+ },
+ "fastboot": {
+  "term": {
+   "es": "fastboot",
+   "en": "fastboot"
+  },
+  "def": {
+   "es": "Modo del bootloader que permite grabar particiones desde un PC. No todos los teléfonos lo exponen: el Y220, por ejemplo, no.",
+   "en": "Bootloader mode that lets you write partitions from a PC. Not every phone exposes it: the Y220, for example, does not."
+  },
+  "see": [
+   "bootloader",
+   "sp-flash-tool"
+  ]
+ },
+ "framebuffer": {
+  "term": {
+   "es": "Framebuffer",
+   "en": "Framebuffer"
+  },
+  "def": {
+   "es": "Zona de memoria de vídeo cuyo contenido se muestra en pantalla. El kernel la expone como `/dev/graphics/fb0`.",
+   "en": "Region of video memory whose contents are shown on screen. The kernel exposes it as `/dev/graphics/fb0`."
+  },
+  "see": [
+   "vram",
+   "bpp",
+   "overlay"
+  ]
+ },
+ "functionfs": {
+  "term": {
+   "es": "FunctionFS",
+   "en": "FunctionFS"
+  },
+  "def": {
+   "es": "Mecanismo del kernel para que un programa de usuario implemente una función USB (como adb o MTP). Android moderno lo usa y los kernels antiguos no lo tienen.",
+   "en": "Kernel mechanism that lets a user-space program implement a USB function (such as adb or MTP). Modern Android uses it and old kernels lack it."
+  },
+  "see": [
+   "adb",
+   "mtp"
+  ]
+ },
+ "fuse": {
+  "term": {
+   "es": "FUSE",
+   "en": "FUSE"
+  },
+  "def": {
+   "es": "Filesystem in Userspace: permite que un programa de usuario ofrezca un sistema de archivos. TWRP lo necesita para `adb sideload`.",
+   "en": "Filesystem in Userspace: lets a user-space program provide a filesystem. TWRP needs it for `adb sideload`."
+  },
+  "see": [
+   "sideload",
+   "twrp"
+  ]
+ },
+ "gingerbread": {
+  "term": {
+   "es": "Gingerbread (Android 2.3)",
+   "en": "Gingerbread (Android 2.3)"
+  },
+  "def": {
+   "es": "Versión 2.3 de Android, de 2010 y 2011. Sus kernels y herramientas son antiguos, y por eso muchas soluciones modernas no sirven.",
+   "en": "Android version 2.3, from 2010–2011. Its kernels and tools are old, which is why many modern solutions do not apply."
+  },
+  "see": [
+   "cm",
+   "kernel"
+  ]
+ },
+ "gpio": {
+  "term": {
+   "es": "GPIO",
+   "en": "GPIO"
+  },
+  "def": {
+   "es": "Pin de propósito general que el software puede leer o escribir: teclas, LEDs, líneas de reinicio.",
+   "en": "General-purpose pin that software can read or write: keys, LEDs, reset lines."
+  },
+  "see": [
+   "i2c"
+  ]
+ },
+ "gpl": {
+  "term": {
+   "es": "GPL",
+   "en": "GPL"
+  },
+  "def": {
+   "es": "Licencia de Linux. Quien distribuye un binario con kernel debe ofrecer el código fuente a quien lo recibe, aunque no todos los fabricantes lo publican.",
+   "en": "The Linux licence. Anyone who distributes a binary containing the kernel must offer the source to whoever receives it, although not every vendor publishes it."
+  },
+  "see": [
+   "kernel",
+   "donor"
+  ]
+ },
+ "gralloc": {
+  "term": {
+   "es": "gralloc",
+   "en": "gralloc"
+  },
+  "def": {
+   "es": "Módulo de Android que reserva los buffers gráficos compartidos entre pantalla, cámara y GPU.",
+   "en": "Android module that allocates the graphics buffers shared between display, camera and GPU."
+  },
+  "see": [
+   "framebuffer",
+   "mali"
+  ]
+ },
+ "host-mode": {
+  "term": {
+   "es": "Modo host (USB host)",
+   "en": "USB host mode"
+  },
+  "def": {
+   "es": "El teléfono actúa como el «PC»: maneja y alimenta lo que se le conecta (pendrive, ratón). Lo contrario es el modo periférico, el normal al conectarlo a un PC.",
+   "en": "The phone acts as the \"PC\": it drives and powers whatever is connected (flash drive, mouse). The opposite is peripheral mode, the usual one when plugged into a PC."
+  },
+  "see": [
+   "otg",
+   "id-pin",
+   "vbus",
+   "ehci"
+  ]
+ },
+ "hostapd": {
+  "term": {
+   "es": "hostapd",
+   "en": "hostapd"
+  },
+  "def": {
+   "es": "Programa que convierte la Wi-Fi del teléfono en un punto de acceso, base de la zona Wi-Fi.",
+   "en": "Program that turns the phone's Wi-Fi into an access point, the basis of the Wi-Fi hotspot."
+  },
+  "see": [
+   "tethering",
+   "wifi-stack"
+  ]
+ },
+ "i2c": {
+  "term": {
+   "es": "I2C",
+   "en": "I2C"
+  },
+  "def": {
+   "es": "Bus serie de dos hilos para hablar con sensores y controladores: táctil, acelerómetro, cámara.",
+   "en": "Two-wire serial bus used to talk to sensors and controllers: touch, accelerometer, camera."
+  },
+  "see": [
+   "gpio"
+  ]
+ },
+ "id-pin": {
+  "term": {
+   "es": "Pin ID",
+   "en": "ID pin"
+  },
+  "def": {
+   "es": "Cuarto pin del micro-USB. Un cable OTG lo conecta a tierra para avisar al teléfono de que debe actuar como host.",
+   "en": "Pin 4 of the micro-USB. An OTG cable grounds it to tell the phone it should act as a host."
+  },
+  "see": [
+   "otg",
+   "host-mode",
+   "vbus"
+  ]
+ },
+ "ipv6": {
+  "term": {
+   "es": "IPv6",
+   "en": "IPv6"
+  },
+  "def": {
+   "es": "Versión 6 del protocolo IP. Android 4.2 espera encontrar `/proc/net/if_inet6` y falla si el kernel lo tiene apagado.",
+   "en": "Version 6 of the IP protocol. Android 4.2 expects `/proc/net/if_inet6` and fails if the kernel has it turned off."
+  },
+  "see": [
+   "netfilter",
+   "nat"
+  ]
+ },
+ "isp": {
+  "term": {
+   "es": "ISP",
+   "en": "ISP"
+  },
+  "def": {
+   "es": "Procesador de señal de imagen: convierte la salida del sensor de la cámara en foto (JPEG) o en vista previa.",
+   "en": "Image signal processor: turns the camera sensor output into a photo (JPEG) or a preview."
+  },
+  "see": [
+   "uyvy",
+   "overlay"
+  ]
+ },
+ "kernel": {
+  "term": {
+   "es": "Kernel",
+   "en": "Kernel"
+  },
+  "def": {
+   "es": "Núcleo del sistema operativo (Linux en Android): maneja el hardware, la memoria y los procesos.",
+   "en": "The core of the operating system (Linux on Android): it manages hardware, memory and processes."
+  },
+  "see": [
+   "boot-partition",
+   "gpl"
+  ]
+ },
+ "last-kmsg": {
+  "term": {
+   "es": "last_kmsg",
+   "en": "last_kmsg"
+  },
+  "def": {
+   "es": "Copia del registro del kernel de antes del último reinicio brusco o *panic*, disponible en `/proc/last_kmsg`. Imprescindible para entender un cuelgue.",
+   "en": "Copy of the kernel log from before the last abrupt reboot or panic, available at `/proc/last_kmsg`. Essential for understanding a hang."
+  },
+  "see": [
+   "dmesg",
+   "panic"
+  ]
+ },
+ "lk": {
+  "term": {
+   "es": "LK (Little Kernel)",
+   "en": "LK (Little Kernel)"
+  },
+  "def": {
+   "es": "Bootloader usado por MediaTek y Qualcomm en Android. Se ejecuta tras el primer cargador (en MediaTek, el preloader), enciende la pantalla, dibuja el logo y carga el kernel.",
+   "en": "Bootloader used by MediaTek and Qualcomm on Android. It runs after the first-stage loader (on MediaTek, the preloader), brings up the display, draws the logo and loads the kernel."
+  },
+  "see": [
+   "bootloader",
+   "atag",
+   "preloader"
+  ]
+ },
+ "m4u": {
+  "term": {
+   "es": "M4U",
+   "en": "M4U"
+  },
+  "def": {
+   "es": "Unidad de gestión de memoria de MediaTek para periféricos multimedia (pantalla, cámara). Las direcciones que asigna se llaman MVA.",
+   "en": "MediaTek memory management unit for multimedia peripherals (display, camera). The addresses it assigns are called MVAs."
+  },
+  "see": [
+   "overlay",
+   "framebuffer"
+  ]
+ },
+ "mali": {
+  "term": {
+   "es": "Mali y UMP",
+   "en": "Mali and UMP"
+  },
+  "def": {
+   "es": "Mali es la familia de GPU de ARM; UMP es el módulo que administra la memoria que comparte con el resto del sistema.",
+   "en": "Mali is ARM's GPU family; UMP is the module that manages the memory it shares with the rest of the system."
+  },
+  "see": [
+   "gralloc",
+   "framebuffer"
+  ]
+ },
+ "mt6572": {
+  "term": {
+   "es": "MT6572",
+   "en": "MT6572"
+  },
+  "def": {
+   "es": "Procesador MediaTek de doble núcleo Cortex-A7, usado en teléfonos económicos como el Huawei Y220.",
+   "en": "Dual-core Cortex-A7 MediaTek processor used in low-end phones such as the Huawei Y220."
+  },
+  "see": [
+   "nand",
+   "ccci"
+  ]
+ },
+ "mtd": {
+  "term": {
+   "es": "MTD",
+   "en": "MTD"
+  },
+  "def": {
+   "es": "Memory Technology Device: capa de Linux para memoria flash cruda. Cada partición aparece como `/dev/mtd/mtdN`.",
+   "en": "Memory Technology Device: the Linux layer for raw flash memory. Each partition shows up as `/dev/mtd/mtdN`."
+  },
+  "see": [
+   "nand",
+   "ubifs"
+  ]
+ },
+ "mtp": {
+  "term": {
+   "es": "MTP",
+   "en": "MTP"
+  },
+  "def": {
+   "es": "Media Transfer Protocol: modo en que el teléfono se muestra a un PC para copiar archivos, sin exponer la memoria como un disco.",
+   "en": "Media Transfer Protocol: the mode in which a phone presents itself to a PC to copy files, without exposing storage as a disk."
+  },
+  "see": [
+   "ums",
+   "functionfs"
+  ]
+ },
+ "nand": {
+  "term": {
+   "es": "NAND",
+   "en": "NAND"
+  },
+  "def": {
+   "es": "Memoria flash de almacenamiento sin controlador propio: el kernel gestiona sus bloques defectuosos y el desgaste.",
+   "en": "Flash storage memory without its own controller: the kernel handles bad blocks and wear levelling."
+  },
+  "see": [
+   "mtd",
+   "ubifs",
+   "emmc"
+  ]
+ },
+ "nat": {
+  "term": {
+   "es": "NAT",
+   "en": "NAT"
+  },
+  "def": {
+   "es": "Traducción de direcciones de red: permite que varios dispositivos compartan la conexión del teléfono en el anclaje.",
+   "en": "Network address translation: lets several devices share the phone's connection when tethering."
+  },
+  "see": [
+   "netfilter",
+   "tethering"
+  ]
+ },
+ "netfilter": {
+  "term": {
+   "es": "Netfilter",
+   "en": "Netfilter"
+  },
+  "def": {
+   "es": "Marco del kernel para filtrar y traducir paquetes. `iptables` y el NAT dependen de él.",
+   "en": "Kernel framework for filtering and translating packets. `iptables` and NAT depend on it."
+  },
+  "see": [
+   "nat",
+   "ipv6",
+   "tethering"
+  ]
+ },
+ "nvram": {
+  "term": {
+   "es": "NVRAM",
+   "en": "NVRAM"
+  },
+  "def": {
+   "es": "En MediaTek, partición con datos únicos de cada equipo, como el IMEI y la calibración de la radio.",
+   "en": "On MediaTek, a partition with each device's unique data, such as the IMEI and radio calibration."
+  },
+  "see": [
+   "mt6572",
+   "mtd"
+  ]
+ },
+ "otg": {
+  "term": {
+   "es": "USB OTG",
+   "en": "USB OTG"
+  },
+  "def": {
+   "es": "On-The-Go: permite que un teléfono haga de host USB para conectar pendrives, ratones y teclados, con un adaptador especial.",
+   "en": "On-The-Go: lets a phone act as a USB host to connect flash drives, mice and keyboards, using a special adapter."
+  },
+  "see": [
+   "host-mode",
+   "id-pin",
+   "vbus",
+   "phy"
+  ]
+ },
+ "overlay": {
+  "term": {
+   "es": "Overlay (capa de pantalla)",
+   "en": "Overlay (display layer)"
+  },
+  "def": {
+   "es": "Plano de hardware de la pantalla que muestra una imagen (vista previa de la cámara, video) sin pasar por la GPU.",
+   "en": "Hardware layer of the display that shows an image (camera preview, video) without going through the GPU."
+  },
+  "see": [
+   "framebuffer",
+   "m4u",
+   "uyvy"
+  ]
+ },
+ "panic": {
+  "term": {
+   "es": "Kernel panic",
+   "en": "Kernel panic"
+  },
+  "def": {
+   "es": "Error irrecuperable del kernel: se detiene y reinicia el equipo. Su mensaje queda en `last_kmsg`.",
+   "en": "Unrecoverable kernel error: the kernel stops and the device reboots. Its message is kept in `last_kmsg`."
+  },
+  "see": [
+   "last-kmsg",
+   "watchdog"
+  ]
+ },
+ "phy": {
+  "term": {
+   "es": "PHY",
+   "en": "PHY"
+  },
+  "def": {
+   "es": "Circuito físico de una interfaz: en USB, el que maneja las señales eléctricas D+ y D−. Muchos fallos de OTG se miden aquí.",
+   "en": "Physical-layer circuit of an interface: in USB, the one that handles the D+ and D− electrical signals. Many OTG faults are measured here."
+  },
+  "see": [
+   "otg",
+   "pull",
+   "se0",
+   "ehci"
+  ]
+ },
+ "pmic": {
+  "term": {
+   "es": "PMIC",
+   "en": "PMIC"
+  },
+  "def": {
+   "es": "Chip de gestión de energía: reguladores, carga de la batería, botón de encendido.",
+   "en": "Power management chip: regulators, battery charging, the power button."
+  },
+  "see": [
+   "gpio"
+  ]
+ },
+ "preloader": {
+  "term": {
+   "es": "Preloader",
+   "en": "Preloader"
+  },
+  "def": {
+   "es": "Primer código de MediaTek que corre al encender, antes del LK. También es la vía por la que SP Flash Tool graba un equipo.",
+   "en": "The first MediaTek code to run at power-on, before the LK. It is also how SP Flash Tool writes to a device."
+  },
+  "see": [
+   "lk",
+   "bootloader",
+   "sp-flash-tool"
+  ]
+ },
+ "pull": {
+  "term": {
+   "es": "Pull-up y pull-down",
+   "en": "Pull-up and pull-down"
+  },
+  "def": {
+   "es": "Resistencias que fijan el nivel de una línea. Un dispositivo USB pone un pull-up en D+ (o D−) para anunciarse; el host tiene pull-downs en ambas.",
+   "en": "Resistors that set the level of a line. A USB device puts a pull-up on D+ (or D−) to announce itself; the host has pull-downs on both."
+  },
+  "see": [
+   "se0",
+   "phy",
+   "otg"
+  ]
+ },
+ "ramdisk": {
+  "term": {
+   "es": "Ramdisk",
+   "en": "Ramdisk"
+  },
+  "def": {
+   "es": "Pequeño sistema de archivos que se carga en RAM al arrancar y contiene `init` y lo mínimo para montar el sistema.",
+   "en": "Small filesystem loaded into RAM at boot that contains `init` and the minimum needed to mount the system."
+  },
+  "see": [
+   "boot-partition",
+   "kernel"
+  ]
+ },
+ "recovery": {
+  "term": {
+   "es": "Recovery",
+   "en": "Recovery"
+  },
+  "def": {
+   "es": "Modo de arranque aparte, con su propia partición, para mantenimiento: instalar archivos zip, hacer copias de seguridad y borrar datos.",
+   "en": "A separate boot mode, with its own partition, for maintenance: installing zip files, backups and wiping data."
+  },
+  "see": [
+   "twrp",
+   "boot-partition",
+   "bcb"
+  ]
+ },
+ "rom": {
+  "term": {
+   "es": "ROM",
+   "en": "ROM"
+  },
+  "def": {
+   "es": "Sistema Android completo compilado desde el código fuente, normalmente por la comunidad, para sustituir al de fábrica.",
+   "en": "A complete Android system built from source, usually by the community, to replace the stock one."
+  },
+  "see": [
+   "cm",
+   "stock",
+   "device-tree"
+  ]
+ },
+ "se0": {
+  "term": {
+   "es": "SE0",
+   "en": "SE0"
+  },
+  "def": {
+   "es": "Estado de línea USB en el que D+ y D− están ambas en bajo. Es lo que ve el puerto cuando no hay ningún dispositivo conectado.",
+   "en": "USB line state in which D+ and D− are both low. It is what the port sees when no device is connected."
+  },
+  "see": [
+   "pull",
+   "phy"
+  ]
+ },
+ "sideload": {
+  "term": {
+   "es": "adb sideload",
+   "en": "adb sideload"
+  },
+  "def": {
+   "es": "Instalar un zip enviándolo desde el PC al recovery por `adb`, sin copiarlo antes al teléfono.",
+   "en": "Installing a zip by sending it from the PC to the recovery over `adb`, without copying it to the phone first."
+  },
+  "see": [
+   "adb",
+   "fuse",
+   "twrp"
+  ]
+ },
+ "slub": {
+  "term": {
+   "es": "SLUB",
+   "en": "SLUB"
+  },
+  "def": {
+   "es": "Asignador de memoria del kernel. Con `SLUB_DEBUG_ON` activa comprobaciones costosas en todas las cachés.",
+   "en": "The kernel memory allocator. With `SLUB_DEBUG_ON` it enables costly checks on every cache."
+  },
+  "see": [
+   "kernel",
+   "zram"
+  ]
+ },
+ "sp-flash-tool": {
+  "term": {
+   "es": "SP Flash Tool",
+   "en": "SP Flash Tool"
+  },
+  "def": {
+   "es": "Herramienta de MediaTek para grabar firmware a través del preloader. Es la salida cuando un teléfono ya no arranca.",
+   "en": "MediaTek tool for writing firmware through the preloader. It is the way out when a phone no longer boots."
+  },
+  "see": [
+   "preloader",
+   "fastboot"
+  ]
+ },
+ "stock": {
+  "term": {
+   "es": "Stock",
+   "en": "Stock"
+  },
+  "def": {
+   "es": "El firmware de fábrica: el que trae el teléfono. Sirve de referencia para comparar el comportamiento de una ROM propia.",
+   "en": "The factory firmware: the one the phone ships with. It is the reference for comparing the behaviour of your own ROM."
+  },
+  "see": [
+   "rom",
+   "donor"
+  ]
+ },
+ "tethering": {
+  "term": {
+   "es": "Anclaje (tethering)",
+   "en": "Tethering"
+  },
+  "def": {
+   "es": "Compartir la conexión móvil del teléfono con otros equipos por USB, Wi-Fi o Bluetooth.",
+   "en": "Sharing the phone's mobile connection with other devices over USB, Wi-Fi or Bluetooth."
+  },
+  "see": [
+   "nat",
+   "netfilter",
+   "hostapd"
+  ]
+ },
+ "twrp": {
+  "term": {
+   "es": "TWRP",
+   "en": "TWRP"
+  },
+  "def": {
+   "es": "Team Win Recovery Project: recovery con interfaz táctil que instala zips, hace copias de seguridad y restaura particiones.",
+   "en": "Team Win Recovery Project: a touch-driven recovery that installs zips, makes backups and restores partitions."
+  },
+  "see": [
+   "recovery",
+   "sideload",
+   "bcb"
+  ]
+ },
+ "ubifs": {
+  "term": {
+   "es": "UBIFS",
+   "en": "UBIFS"
+  },
+  "def": {
+   "es": "Sistema de archivos para memoria NAND cruda, que funciona sobre UBI, una capa de gestión de volúmenes. `system`, `data` y `cache` del Y220 lo usan.",
+   "en": "Filesystem for raw NAND flash, running on top of UBI, a volume management layer. The Y220's `system`, `data` and `cache` use it."
+  },
+  "see": [
+   "nand",
+   "mtd"
+  ]
+ },
+ "ums": {
+  "term": {
+   "es": "Almacenamiento masivo USB (UMS)",
+   "en": "USB mass storage (UMS)"
+  },
+  "def": {
+   "es": "Modo en que el teléfono se muestra a un PC como un disco, exponiendo la microSD. Se contrapone a MTP.",
+   "en": "Mode in which the phone shows up on a PC as a disk, exposing the microSD. The alternative is MTP."
+  },
+  "see": [
+   "mtp"
+  ],
+  "sortkey": {
+   "es": "almacenamiento masivo usb"
+  }
+ },
+ "uyvy": {
+  "term": {
+   "es": "YUV, UYVY y YUYV",
+   "en": "YUV, UYVY and YUYV"
+  },
+  "def": {
+   "es": "Formatos de imagen que separan el brillo (Y) del color (U y V). UYVY y YUYV llevan los mismos datos en distinto orden de bytes, y confundirlos tiñe de verde y magenta.",
+   "en": "Image formats that separate brightness (Y) from colour (U and V). UYVY and YUYV carry the same data in a different byte order, and mixing them up tints images green and magenta."
+  },
+  "see": [
+   "isp",
+   "overlay"
+  ]
+ },
+ "vbus": {
+  "term": {
+   "es": "VBUS",
+   "en": "VBUS"
+  },
+  "def": {
+   "es": "La línea de 5 V del USB. En modo host, alguien tiene que alimentarla: o el teléfono, o una fuente externa.",
+   "en": "The 5 V line of USB. In host mode someone has to power it: the phone or an external supply."
+  },
+  "see": [
+   "otg",
+   "host-mode",
+   "id-pin"
+  ]
+ },
+ "vermagic": {
+  "term": {
+   "es": "vermagic y MODVERSIONS",
+   "en": "vermagic and MODVERSIONS"
+  },
+  "def": {
+   "es": "Mecanismos con los que el kernel comprueba que un módulo se compiló para él. Sin `MODVERSIONS`, un módulo de otra compilación con el mismo `vermagic` se carga igual y puede provocar un *panic*.",
+   "en": "Mechanisms the kernel uses to check that a module was built for it. Without `MODVERSIONS`, a module from another build with the same `vermagic` still loads and can cause a panic."
+  },
+  "see": [
+   "kernel",
+   "panic"
+  ]
+ },
+ "vram": {
+  "term": {
+   "es": "VRAM",
+   "en": "VRAM"
+  },
+  "def": {
+   "es": "Memoria reservada para el framebuffer. Su tamaño depende de la resolución y de los bits por píxel.",
+   "en": "Memory reserved for the framebuffer. Its size depends on the resolution and the bits per pixel."
+  },
+  "see": [
+   "framebuffer",
+   "bpp"
+  ]
+ },
+ "watchdog": {
+  "term": {
+   "es": "Watchdog",
+   "en": "Watchdog"
+  },
+  "def": {
+   "es": "Temporizador que reinicia el equipo si el sistema deja de «alimentarlo», señal de que se colgó.",
+   "en": "A timer that reboots the device if the system stops \"feeding\" it, a sign that it hung."
+  },
+  "see": [
+   "panic"
+  ]
+ },
+ "wifi-stack": {
+  "term": {
+   "es": "wpa_supplicant, nl80211 y cfg80211",
+   "en": "wpa_supplicant, nl80211 and cfg80211"
+  },
+  "def": {
+   "es": "`wpa_supplicant` autentica en redes Wi-Fi. Habla con el driver por WEXT (interfaz antigua) o por nl80211 sobre cfg80211 (la moderna). Cada versión espera una de las dos.",
+   "en": "`wpa_supplicant` authenticates to Wi-Fi networks. It talks to the driver over WEXT (the old interface) or over nl80211 on top of cfg80211 (the modern one). Each version expects one of them."
+  },
+  "see": [
+   "hostapd",
+   "tethering"
+  ]
+ },
+ "zram": {
+  "term": {
+   "es": "zram",
+   "en": "zram"
+  },
+  "def": {
+   "es": "Disco virtual comprimido en RAM que se usa como swap: da más memoria útil a equipos con poca RAM.",
+   "en": "A compressed virtual disk in RAM used as swap: it gives more usable memory on devices with little RAM."
+  },
+  "see": [
+   "slub",
+   "kernel"
+  ]
+ }
+}

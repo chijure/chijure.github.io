@@ -366,3 +366,23 @@ footer p { margin: 0; }
 /* GenericUnderline */ .chroma .gl { text-decoration:underline }
 /* TextWhitespace */ .chroma .w { color:#6e7681 }
 }
+
+/* ---- Glosario ---- */
+.gloss { color: inherit; text-decoration: underline dotted var(--accent); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+.gloss:hover { color: var(--accent); }
+.letters { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 1rem; }
+.letters a {
+  display: inline-block; min-width: 2.1rem; padding: .25rem .5rem; text-align: center; text-decoration: none;
+  font-family: var(--mono); font-weight: 700; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text);
+}
+.letters a:hover { border-color: var(--accent); color: var(--accent); }
+.glossary .letter { margin: 2rem 0 .6rem; padding-bottom: .3rem; border-bottom: 1px solid var(--line); font-family: var(--mono); color: var(--accent); }
+.glossary dl { margin: 0; }
+.glossary dt { margin-top: 1.1rem; font-size: 1.12rem; font-weight: 700; scroll-margin-top: 5rem; }
+.glossary dt .anchor { color: var(--text); text-decoration: none; }
+.glossary dt .anchor:hover { color: var(--accent); text-decoration: underline; }
+.glossary dt:target { background: var(--surface-2); border-radius: 8px; padding: .2rem .5rem; }
+.glossary dd { margin: .25rem 0 0; max-width: 46rem; color: var(--muted); }
+.glossary dd p { margin: 0 0 .35rem; }
+.glossary dd code { font-family: var(--mono); font-size: .9em; background: var(--surface-2); padding: .1rem .35rem; border-radius: 5px; }
+.glossary .see { font-size: .92rem; }

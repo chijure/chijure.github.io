@@ -6,23 +6,23 @@ tags: [android, kernel, usb]
 draft: false
 ---
 
-On the LG L3 (E400), USB host mode worked with a powered OTG adapter, so I tried the same on the **LG Optimus Pro C660**. It does not work, and this is what I measured to be sure.
+On the LG L3 (E400), {{< g "host-mode" "USB host" >}} mode worked with a powered {{< g "otg" "OTG" >}} adapter, so I tried the same on the **LG Optimus Pro C660**. It does not work, and this is what I measured to be sure.
 
 ## Starting point
 
-The C660's 2.6.35 kernel was built without the host stack: `CONFIG_USB`, `USB_EHCI_HCD`, `USB_EHCI_MSM` and `USB_STORAGE` were missing. The board did register the `msm_hsusb_host` controller.
+The C660's 2.6.35 {{< g "kernel" "kernel" >}} was built without the host stack: `CONFIG_USB`, `USB_EHCI_HCD`, `USB_EHCI_MSM` and `USB_STORAGE` were missing. The board did register the `msm_hsusb_host` controller.
 
 Once enabled, `usb-storage` failed to build: LG's tree had the `usb_usual_ignore_device` prototypes inside an `#ifdef CONFIG_USB_LIBUSUAL`, even though `usb-storage` uses them without libusual. Moving them out of the `#ifdef` was enough.
 
 ## What did work
 
-- The driver reads the **ID pin** (`otg_mode` is `OTG_ID`), so it ignored the host mode requested through `debugfs`. I added a `user_host` flag that only takes effect when `host` is requested.
+- The driver reads the **{{< g "id-pin" "ID pin" >}}** (`otg_mode` is `OTG_ID`), so it ignored the host mode requested through `debugfs`. I added a `user_host` flag that only takes effect when `host` is requested.
 - With `echo host > /sys/kernel/debug/otg/mode` the `usb1` bus registers and the state machine reaches `a_wait_bcon`.
-- The PHY reports **ID grounded** and **VBUS valid**.
+- The {{< g "phy" "PHY" >}} reports **ID grounded** and **{{< g "vbus" "VBUS" >}} valid**.
 
 ## What does not work
 
-With a flash drive (full-speed, pull-up on D+) and with a mouse (low-speed, pull-up on D-), the PHY line state stays at **SE0** and the port never reports a connection. I tried six values of the PHY *Function Control* register, with and without the D+ and D- pull-downs: neither line moves.
+With a flash drive (full-speed, {{< g "pull" "pull-up" >}} on D+) and with a mouse (low-speed, pull-up on D-), the PHY line state stays at **{{< g "se0" "SE0" >}}** and the port never reports a connection. I tried six values of the PHY *Function Control* register, with and without the D+ and D- pull-downs: neither line moves.
 
 Something misleading: removing the pull-downs produced `-71` errors, but that was a **false connection**. With the device-mode termination, the PHY itself pulls D+ high and the controller believes a device is attached.
 
@@ -39,4 +39,4 @@ echo dump > /sys/kernel/debug/otg/mode   # read the PHY registers
 echo "ulpi 0x04 0x40" > /sys/kernel/debug/otg/mode
 ```
 
-With host mode on, the USB port is no good for adb: use adb over Wi-Fi.
+With host mode on, the USB port is no good for {{< g "adb" "adb" >}}: use adb over Wi-Fi.

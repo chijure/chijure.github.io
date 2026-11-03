@@ -1,0 +1,8 @@
+{{- /* Enlace a un término del glosario: {{< g "ubifs" >}} o {{< g "ubifs" "texto distinto" >}} */ -}}
+{{- $id := .Get 0 -}}
+{{- $lang := site.Language.Lang -}}
+{{- $e := index hugo.Data.glossary $id -}}
+{{- if not $e }}{{ errorf "glosario: no existe el término %q (%s)" $id .Position }}{{ end -}}
+{{- $text := .Get 1 | default (index $e.term $lang) -}}
+{{- $base := printf "/%s/" (i18n "glossary_slug") | relLangURL -}}
+<a class="gloss" href="{{ $base }}#{{ $id }}" title="{{ index $e.def $lang | markdownify | plainify }}">{{ $text }}</a>{{- "" -}}

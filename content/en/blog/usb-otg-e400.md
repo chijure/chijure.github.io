@@ -6,15 +6,15 @@ tags: [android, usb, e400]
 draft: false
 ---
 
-On the **LG Optimus L3 (E400)** running CyanogenMod 7, a flash drive plugged in through USB OTG works: it mounts by itself and can be read from the phone. This is what it took, compared with the [C660]({{< relref "usb-otg-c660.md" >}}), where there was no way.
+On the **LG Optimus L3 (E400)** running {{< g "cm" "CyanogenMod" >}} 7, a flash drive plugged in through {{< g "otg" "USB OTG" >}} works: it mounts by itself and can be read from the phone. This is what it took, compared with the [C660]({{< relref "usb-otg-c660.md" >}}), where there was no way.
 
 
 ## What the phone already had
 
-LG's 2.6.38 kernel already includes the host controller (`msm_hsusb_host.0`), `usb-storage` and a `debugfs` control. The kernel did not need changes. What was missing:
+LG's 2.6.38 {{< g "kernel" "kernel" >}} already includes the host controller (`msm_hsusb_host.0`), `usb-storage` and a `debugfs` control. The kernel did not need changes. What was missing:
 
 1. **Mounting the disk.** A `usbdisk` entry in `vold.fstab` pointing at `/devices/platform/msm_hsusb_host.0`, mounting the drive at `/mnt/usbdisk`.
-2. **A switch.** The micro-USB ID pin **does not reach the processor** (the `OTGSC` register always reads 1), so the phone never enters host mode by itself. It has to be forced.
+2. **A switch.** The micro-USB {{< g "id-pin" "ID pin" >}} **does not reach the processor** (the `OTGSC` register always reads 1), so the phone never enters {{< g "host-mode" "host mode" >}} by itself. It has to be forced.
 
 ## The switch
 
@@ -26,7 +26,7 @@ The kernel accepts the mode in `/sys/kernel/debug/otg/mode`. I tied it to a syst
 1. Open OtgSwitch and turn host mode on **before** plugging the cable.
 2. Connect the OTG adapter and the flash drive.
 3. The disk shows up at `/mnt/usbdisk`.
-4. To go back, turn host mode off: adb and USB charging return.
+4. To go back, turn host mode off: {{< g "adb" "adb" >}} and USB charging return.
 
 ## Which adapter I used
 
@@ -36,7 +36,7 @@ A **90° micro-USB OTG adapter** ([Mercado Libre listing](https://www.mercadolib
 ## Limits
 
 - **The phone does not supply 5 V.** The connected device needs external power.
-- Host mode disables VBUS and ID detection and is **lost on reboot**.
+- Host mode disables {{< g "vbus" "VBUS" >}} and ID detection and is **lost on reboot**.
 - With host mode on, the USB port is no good for adb: use adb over Wi-Fi (`setprop service.adb.tcp.port 5555`).
 - A mouse and a keyboard show up as ordinary input devices. I tested the mouse on a CM10.1 build.
 

@@ -1,0 +1,46 @@
+{{ define "main" }}
+{{- $lang := site.Language.Lang }}
+{{- $items := slice }}
+{{- range $id, $e := hugo.Data.glossary }}
+  {{- $sk := index $e.term $lang }}
+  {{- with $e.sortkey }}{{ with index . $lang }}{{ $sk = . }}{{ end }}{{ end }}
+  {{- $items = $items | append (dict "id" $id "term" (index $e.term $lang) "def" (index $e.def $lang) "see" $e.see "key" (lower $sk)) }}
+{{- end }}
+{{- $items = sort $items "key" }}
+{{- $letters := slice }}
+{{- range $items }}
+  {{- $l := upper (substr .key 0 1) }}
+  {{- if not (in $letters $l) }}{{ $letters = $letters | append $l }}{{ end }}
+{{- end }}
+<section class="glossary" aria-labelledby="glossary-title">
+  <header class="section-head page-head">
+    <h1 id="glossary-title">{{ i18n "glossary_title" }}</h1>
+    <p>{{ i18n "glossary_lead" }}</p>
+    <p class="meta">{{ len $items }} {{ i18n "glossary_count" }}</p>
+  </header>
+  <nav class="letters" aria-label="{{ i18n "glossary_letters" }}">
+    {{- range $letters }}<a href="#letra-{{ . }}">{{ . }}</a>{{ end }}
+  </nav>
+  {{- range $letters }}
+  {{- $l := . }}
+  <section aria-labelledby="letra-{{ $l }}">
+    <h2 id="letra-{{ $l }}" class="letter">{{ $l }}</h2>
+    <dl>
+      {{- range $items }}
+      {{- if eq (upper (substr .key 0 1)) $l }}
+      <dt id="{{ .id }}"><a class="anchor" href="#{{ .id }}">{{ .term }}</a></dt>
+      <dd>
+        <p>{{ .def | markdownify }}</p>
+        {{- with .see }}
+        <p class="see">{{ i18n "glossary_see" }}:
+          {{- range $i, $s := . }}{{ if $i }},{{ end }} <a href="#{{ $s }}">{{ index (index hugo.Data.glossary $s).term $lang }}</a>{{ end }}
+        </p>
+        {{- end }}
+      </dd>
+      {{- end }}
+      {{- end }}
+    </dl>
+  </section>
+  {{- end }}
+</section>
+{{ end }}
