@@ -35,6 +35,12 @@ la fuente a GitHub Actions antes del primer push (o con
 publicó mal, lanzar `gh workflow run deploy.yml`. La CDN guarda la página 10 minutos:
 probar con Ctrl+Shift+R.
 
+## Idiomas
+
+Español e inglés. El idioma sale de `?lang=es|en`, luego de lo guardado en el navegador y, si no,
+del idioma del navegador (inglés si no empieza por `es`). Todos los textos viven en
+`src/data.ts` como `{ es, en }`: al añadir un proyecto hay que escribir las dos versiones.
+
 ## Para añadir un proyecto
 
 Agregar un objeto a la lista que corresponda en `src/data.ts`

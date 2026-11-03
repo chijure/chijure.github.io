@@ -62,12 +62,22 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .brand { font-family: var(--mono); font-weight: 700; color: var(--text); text-decoration: none; }
 .brand span { color: var(--accent); }
+.topbar nav { margin-left: auto; }
 .topbar nav ul { display: flex; gap: .25rem; flex-wrap: wrap; justify-content: flex-end; }
 .topbar nav a {
   display: block; padding: .35rem .7rem; border-radius: 999px;
   color: var(--muted); text-decoration: none; font-size: .95rem;
 }
 .topbar nav a:hover { color: var(--text); background: var(--surface-2); }
+
+.lang { display: flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--surface); }
+.lang button {
+  font: inherit; font-family: var(--mono); font-size: .82rem; font-weight: 700;
+  min-width: 2.6rem; padding: .3rem .6rem; border: 0; border-radius: 999px;
+  background: transparent; color: var(--muted); cursor: pointer;
+}
+.lang button:hover { color: var(--text); }
+.lang button[aria-pressed='true'] { background: var(--accent); color: var(--accent-ink); }
 
 main { max-width: 1120px; margin: 0 auto; padding: 0 1rem 4rem; }
 
@@ -137,8 +147,10 @@ footer {
 footer p { margin: 0; }
 
 @media (max-width: 640px) {
-  .topbar { flex-direction: column; align-items: flex-start; gap: .3rem; }
+  .topbar { flex-wrap: wrap; align-items: center; gap: .3rem .75rem; }
+  .topbar nav { order: 3; flex: 1 0 100%; margin-left: 0; }
   .topbar nav ul { justify-content: flex-start; }
+  .lang { margin-left: auto; }
   html { scroll-padding-top: 7rem; }
 }
 @media (prefers-reduced-motion: reduce) {

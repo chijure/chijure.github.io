@@ -1,23 +1,48 @@
-import { android, profile, research, skills, software, tools } from './data'
-import type { Item } from './data'
+import { useEffect, useState } from 'react'
+import { android, profile, research, sections, skills, software, strings, tools } from './data'
+import type { Item, L, Lang } from './data'
 
-const nav = [
-  { id: 'android', label: 'Android' },
-  { id: 'herramientas', label: 'Herramientas' },
-  { id: 'investigacion', label: 'Investigación' },
-  { id: 'software', label: 'Software' },
-  { id: 'perfil', label: 'Perfil' },
+const STORAGE_KEY = 'lang'
+const YEAR = new Date().getFullYear()
+
+const nav: { id: keyof typeof sections | 'perfil'; label: L }[] = [
+  { id: 'android', label: { es: 'Android', en: 'Android' } },
+  { id: 'tools', label: sections.tools.title },
+  { id: 'research', label: { es: 'Investigación', en: 'Research' } },
+  { id: 'software', label: { es: 'Software', en: 'Software' } },
+  { id: 'perfil', label: strings.aboutTitle },
 ]
 
-function Card({ item }: { item: Item }) {
+const languages: { code: Lang; short: string; name: string }[] = [
+  { code: 'es', short: 'ES', name: 'Español' },
+  { code: 'en', short: 'EN', name: 'English' },
+]
+
+function isLang(value: string | null): value is Lang {
+  return value === 'es' || value === 'en'
+}
+
+function initialLang(): Lang {
+  const fromUrl = new URLSearchParams(window.location.search).get('lang')
+  if (isLang(fromUrl)) return fromUrl
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY)
+    if (isLang(saved)) return saved
+  } catch {
+    // Storage can be blocked (private mode): fall back to the browser language.
+  }
+  return window.navigator.language?.toLowerCase().startsWith('es') ? 'es' : 'en'
+}
+
+function Card({ item, lang }: { item: Item; lang: Lang }) {
   return (
     <li className="card">
       <div className="card-head">
         <h3>{item.name}</h3>
-        {item.status && <span className="status">{item.status}</span>}
+        {item.status && <span className="status">{item.status[lang]}</span>}
       </div>
-      <p>{item.summary}</p>
-      <ul className="tags" aria-label="Tecnologías">
+      <p>{item.summary[lang]}</p>
+      <ul className="tags" aria-label={strings.tagsLabel[lang]}>
         {item.tags.map((tag) => (
           <li key={tag}>{tag}</li>
         ))}
@@ -25,7 +50,7 @@ function Card({ item }: { item: Item }) {
       <div className="links">
         {item.links.map((link) => (
           <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
-            {link.label}
+            {typeof link.label === 'string' ? link.label : link.label[lang]}
           </a>
         ))}
       </div>
@@ -33,16 +58,25 @@ function Card({ item }: { item: Item }) {
   )
 }
 
-function Section({ id, title, lead, items }: { id: string; title: string; lead: string; items: Item[] }) {
+function Section({
+  id,
+  items,
+  lang,
+}: {
+  id: keyof typeof sections
+  items: Item[]
+  lang: Lang
+}) {
+  const section = sections[id]
   return (
     <section id={id} aria-labelledby={`${id}-title`}>
       <header className="section-head">
-        <h2 id={`${id}-title`}>{title}</h2>
-        <p>{lead}</p>
+        <h2 id={`${id}-title`}>{section.title[lang]}</h2>
+        <p>{section.lead[lang]}</p>
       </header>
       <ul className="grid">
         {items.map((item) => (
-          <Card key={item.name} item={item} />
+          <Card key={item.name} item={item} lang={lang} />
         ))}
       </ul>
     </section>
@@ -50,79 +84,85 @@ function Section({ id, title, lead, items }: { id: string; title: string; lead: 
 }
 
 export default function App() {
+  const [lang, setLang] = useState<Lang>(initialLang)
+
+  useEffect(() => {
+    document.documentElement.lang = lang
+    document.title = strings.title[lang]
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute('content', strings.description[lang])
+    try {
+      window.localStorage.setItem(STORAGE_KEY, lang)
+    } catch {
+      // Not persisting is fine; the choice still applies to this visit.
+    }
+  }, [lang])
+
   return (
     <>
-      <a className="skip" href="#contenido">Saltar al contenido</a>
+      <a className="skip" href="#contenido">{strings.skip[lang]}</a>
       <header className="topbar">
-        <a className="brand" href="#inicio" aria-label="Inicio">
+        <a className="brand" href="#inicio" aria-label={lang === 'es' ? 'Inicio' : 'Home'}>
           <span aria-hidden="true">&gt;_</span> {profile.handle}
         </a>
-        <nav aria-label="Principal">
+        <nav aria-label={strings.mainNav[lang]}>
           <ul>
             {nav.map((entry) => (
               <li key={entry.id}>
-                <a href={`#${entry.id}`}>{entry.label}</a>
+                <a href={`#${entry.id}`}>{entry.label[lang]}</a>
               </li>
             ))}
           </ul>
         </nav>
+        <div className="lang" role="group" aria-label={strings.langLabel[lang]}>
+          {languages.map((option) => (
+            <button
+              key={option.code}
+              type="button"
+              lang={option.code}
+              aria-pressed={lang === option.code}
+              aria-label={option.name}
+              title={option.name}
+              onClick={() => setLang(option.code)}
+            >
+              {option.short}
+            </button>
+          ))}
+        </div>
       </header>
 
       <main id="contenido">
         <section id="inicio" className="hero" aria-labelledby="hero-title">
-          <p className="eyebrow">{profile.roles.join(' · ')}</p>
+          <p className="eyebrow">{strings.roles[lang]}</p>
           <h1 id="hero-title">{profile.name}</h1>
-          <p className="intro">{profile.intro}</p>
+          <p className="intro">{strings.intro[lang]}</p>
           <div className="cta">
             <a className="btn primary" href={profile.github} target="_blank" rel="noopener noreferrer">
-              GitHub
+              {strings.ctaGithub[lang]}
             </a>
             <a className="btn" href={profile.org} target="_blank" rel="noopener noreferrer">
-              Proyectos Android
+              {strings.ctaAndroid[lang]}
             </a>
             <a className="btn" href={profile.web} target="_blank" rel="noopener noreferrer">
-              Sitio personal
+              {strings.ctaWeb[lang]}
             </a>
           </div>
         </section>
 
-        <Section
-          id="android"
-          title="Ports de Android"
-          lead="Equipos que ya nadie actualiza, de nuevo en marcha: ROMs, recoveries y kernels construidos desde el código fuente."
-          items={android}
-        />
-        <Section
-          id="herramientas"
-          title="Herramientas"
-          lead="Lo que fui necesitando para probar, documentar y publicar mejor ese trabajo."
-          items={tools}
-        />
-        <Section
-          id="investigacion"
-          title="Hardware e investigación"
-          lead="Bootloaders, recuperación de equipos y arreglos de hardware, probados siempre en el equipo real."
-          items={research}
-        />
-        <Section
-          id="software"
-          title="Desarrollo de software"
-          lead="Aplicaciones móviles y web, además de plugins para la comunidad."
-          items={software}
-        />
+        <Section id="android" items={android} lang={lang} />
+        <Section id="tools" items={tools} lang={lang} />
+        <Section id="research" items={research} lang={lang} />
+        <Section id="software" items={software} lang={lang} />
 
         <section id="perfil" aria-labelledby="perfil-title" className="about">
           <header className="section-head">
-            <h2 id="perfil-title">Perfil</h2>
+            <h2 id="perfil-title">{strings.aboutTitle[lang]}</h2>
           </header>
           <div className="about-body">
-            <p>
-              Trabajo como arquitecto de software, enseño y participo como catequista.
-              Me gusta explicar lo que construyo: cada port que publico lleva su estado real, las
-              pruebas hechas y lo que todavía no funciona.
-            </p>
-            <h3>Tecnologías</h3>
-            <ul className="chips" aria-label="Tecnologías que uso">
+            <p>{strings.aboutText[lang]}</p>
+            <h3>{strings.skillsTitle[lang]}</h3>
+            <ul className="chips" aria-label={strings.skillsLabel[lang]}>
               {skills.map((skill) => (
                 <li key={skill}>{skill}</li>
               ))}
@@ -133,7 +173,7 @@ export default function App() {
 
       <footer>
         <p>
-          © {new Date().getFullYear()} {profile.name} ·{' '}
+          © {YEAR} {profile.name} ·{' '}
           <a href={profile.github} target="_blank" rel="noopener noreferrer">github.com/{profile.handle}</a>
         </p>
       </footer>
