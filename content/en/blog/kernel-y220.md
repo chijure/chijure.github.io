@@ -82,3 +82,7 @@ One commit ignores power-key releases with no matching press, but it is in `pmic
 ```
 
 With the `arm-linux-androideabi-4.6` toolchain. The code is in the [android_kernel_huawei_y220-u05](https://github.com/chijure-android-system-development/android_kernel_huawei_y220-u05) repository, and the device tree in [android_device_huawei_y220](https://github.com/chijure-android-system-development/android_device_huawei_y220).
+
+## What comes next
+
+**Update (3 November 2026).** I have just bought three more phones from Huawei's Y series: a **Y320**, a **Y321** and a **Y330**. I looked and found no published kernel sources for any of the three (Huawei does publish them for some high-end models), so I assume there are none and the same work will have to be repeated: capture the stock firmware, start from a donor tree and test each kernel first as a recovery, as I described in [the first article]({{< relref "y220-twrp-primero.md" >}}).

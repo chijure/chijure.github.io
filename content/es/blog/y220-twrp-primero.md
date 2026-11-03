@@ -10,6 +10,16 @@ El **Huawei Ascend Y220-U05** usa un MediaTek **MT6572** con Android 2.3.6 de f�
 
 Este es el primero de dos artículos. Aquí cuento **cómo lo probé sin arriesgar el sistema del teléfono**; en el [segundo]({{< relref "kernel-y220.md" >}}) están los arreglos concretos del kernel.
 
+## Punto de partida: no hay fuentes
+
+Huawei nunca publicó el código fuente del kernel del Y220. Linux es GPL, así que ese código debería poder obtenerse, pero para este modelo no encontré nada: ni publicado por Huawei ni en repositorios de la comunidad. Tampoco encontré el árbol de otro aficionado que pudiera tomar como base.
+
+Lo que sí tenía era el teléfono, su firmware de fábrica y el kernel binario que trae. Eso lo cambió todo:
+
+- **Un árbol donante.** Tuve que partir del kernel de *otro* teléfono con el mismo procesador (MT6572), que no es el Y220 y no coincide en panel, memoria ni sensores.
+- **El kernel de fábrica como referencia.** Cada vez que el donante hacía algo distinto, comparaba con lo que hace el original: capturé del teléfono de fábrica las particiones, las propiedades y el `dmesg`, y **desensamblé la imagen del kernel de fábrica** para ver qué registros escribe, por ejemplo al iniciar el sensor de la cámara.
+- **Mucha prueba y error.** Sin fuentes no hay manual: cada arreglo sale de comparar el comportamiento con el del equipo original. Por eso necesitaba probar los kernels sin arriesgar el sistema.
+
 ## Primero en TWRP, no en la ROM
 
 Antes de tocar el Android del teléfono quise un sitio donde un kernel malo no costara nada. La respuesta fue **TWRP**. El Y220 tiene dos particiones de 6 MB, `boot` (`mtd7`) y `recovery` (`mtd8`). Los primeros kernels los probé como *recovery*: un TWRP con el kernel nuevo, escrito en `mtd8`, mientras el Android de fábrica seguía intacto en `boot`. Si el kernel no arrancaba, el teléfono conservaba su sistema y volver atrás era escribir otra imagen en recovery. (Las primeras imágenes de esta serie, del 7 y 8 de octubre, son recoveries.)

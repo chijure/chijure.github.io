@@ -82,3 +82,7 @@ Uno de los commits ignora las liberaciones de la tecla de encendido sin pulsaci�
 ```
 
 Con el toolchain `arm-linux-androideabi-4.6`. El código está en el repositorio [android_kernel_huawei_y220-u05](https://github.com/chijure-android-system-development/android_kernel_huawei_y220-u05), y el árbol del dispositivo en [android_device_huawei_y220](https://github.com/chijure-android-system-development/android_device_huawei_y220).
+
+## Lo que sigue
+
+**Actualización (3 de noviembre de 2026).** Acabo de comprar tres teléfonos más de la serie Y de Huawei: un **Y320**, un **Y321** y un **Y330**. Busqué y no encontré fuentes del kernel publicadas para ninguno de los tres (Huawei sí las publica para algunos modelos de gama alta), así que doy por hecho que tampoco las hay y que habrá que repetir el mismo trabajo: capturar el firmware de fábrica, partir de un árbol donante y probar cada kernel primero como recovery, como conté en [el primer artículo]({{< relref "y220-twrp-primero.md" >}}).
