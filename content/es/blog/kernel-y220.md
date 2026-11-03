@@ -1,50 +1,19 @@
 ---
-title: "Kernel 3.4.5 para el Huawei Y220-U05: 26 commits de un donante de Lenovo a un Gingerbread estable"
+title: "Kernel 3.4.5 para el Huawei Y220-U05: 26 commits de un árbol donante a un Gingerbread estable"
 date: 2026-10-23
 description: "El Y220-U05 (MediaTek MT6572) corre un kernel sacado de un árbol donante. Esto fue lo que hubo que arreglar, del arranque al Wi-Fi, la cámara, la carga con el teléfono apagado y el hotspot."
 tags: [android, kernel, y220, mediatek]
-draft: true
+draft: false
 ---
 
-El **Huawei Ascend Y220-U05** usa un MediaTek **MT6572** con Android 2.3.6 de fábrica (compilación `C482B206SP05`). Para el port de CyanogenMod necesitaba un kernel propio, y el punto de partida fue un árbol **donante** de Longcheer para Jelly Bean (`lcsh72_we_jb3`): un Linux 3.4.5 con soporte de MediaTek (su historial lo marca como importado desde un proyecto de Lenovo en 2014). Ese donante tiene otro panel (DSI FWVGA) y otra memoria (eMMC), y el Y220 tiene un ILI9488 de 320x480 y NAND.
+Este es el segundo de dos artículos sobre el kernel del **Huawei Ascend Y220-U05** (MediaTek **MT6572**, Android 2.3.6 de fábrica). En el [primero]({{< relref "y220-twrp-primero.md" >}}) cuento cómo lo probé en TWRP para no arriesgar el sistema. Aquí van los arreglos.
 
-Entre el 8 y el 23 de octubre de 2026 hice **26 commits** y compilé kernels numerados hasta el `#98` (el número es el contador de compilaciones). Esto es lo que arreglé, solo en el kernel, y primero cómo lo probé sin arriesgar el sistema.
-
-## Primero en TWRP, no en la ROM
-
-Antes de tocar el Android del teléfono quise un sitio donde un kernel malo no costara nada. La respuesta fue **TWRP**. El Y220 tiene dos particiones de 6 MB, `boot` (`mtd7`) y `recovery` (`mtd8`). Los primeros kernels los probé como *recovery*: un TWRP con el kernel nuevo, escrito en `mtd8`, mientras el Android de fábrica seguía intacto en `boot`. Si el kernel no arrancaba, el teléfono conservaba su sistema y volver atrás era escribir otra imagen en recovery. (Las primeras imágenes de esta serie, del 7 y 8 de octubre, son recoveries.)
-
-Montar ese banco de pruebas tuvo su propio trabajo:
-
-- **Un árbol de TWRP para el Y220** (8 de octubre). Las cabeceras MTK las pone `mtkbootimg --mtk 1`, y `system`, `data` y `cache` son UBIFS: `ubiattach` los monta en el orden de arranque de fábrica (`mtd14`, `mtd16`, `mtd15`).
-- **Un límite exacto de 6 MiB.** El TWRP hubo que podarlo (solo los idiomas `en` y `es`, sin `sgdisk`) y el kernel tiene que ser pequeño. Hoy la imagen con el kernel `#92` queda 38 KB por debajo del límite.
-- **Una forma de grabar que no es obvia.** `dd` a `mtdblock8` solo *borra* la partición; hay que borrar con `mtderase` y escribir con `nandwrite` sobre `/dev/mtd/mtd8`, y nunca sobre `mtd7`.
-- **Una red de seguridad.** El teléfono no expone fastboot. Si algo se rompía fuera del recovery, la salida era SP Flash Tool v5 sobre el preloader (nunca la v6, y nunca *Format All*).
-
-Los primeros kernels dejaron claro por qué convenía ese camino:
-
-- **`#7`** arrancaba, pero el táctil msg2133 fallaba con `I2C transfer error` y la pantalla táctil nunca aparecía.
-- **`#16`** ya reconocía el panel, pero sin las teclas capacitivas.
-- **`#59`** (9 de octubre) fue una reconstrucción completa con la configuración del sistema: conserva las líneas de teclas (Menú, Inicio y Atrás) y el LED de los botones en el GPIO 141. Es el kernel que dejé fijo en el TWRP.
-
-La conclusión quedó escrita en el README del árbol: **no se mete en el recovery un kernel de sistema sin probar**. Un experimento de `boot` malo no debe llevarse el recovery con él, así que el recovery conserva un kernel conocido (primero `#59` y luego `#92`) y es lo que queda para rescatar el teléfono.
-
-Con el TWRP estable, el flujo de trabajo fue siempre el mismo:
-
-1. `adb reboot recovery` y, desde ahí, `flash_image boot` con la imagen nueva.
-2. `dump_image boot` y comparar los md5 antes de reiniciar.
-3. Instalar los módulos montando `/system` desde el propio recovery.
-4. Guardar siempre el `boot` anterior: en mi carpeta hay una imagen `boot-...-before-...img` por cada cambio importante.
-
-TWRP resultó útil además como banco de diagnóstico. Escribe tan poco log que su `dmesg` conserva el arranque entero, y con él confirmé las direcciones del arreglo del logo de arranque. Restaurar el backup de fábrica desde TWRP me dejó hacer la comparación A/B con el kernel original: así descarté que el "solo llamadas de emergencia" viniera del kernel. Y también tuvo sus propios errores: tras un backup o restore grandes, UBIFS no encontraba un bloque contiguo de unos 248 KB para montar y fallaba con `Out of memory`; lo resolví con un script que suelta la caché cuando pasa de 32 MB.
+El punto de partida fue un árbol **donante** de Longcheer para Jelly Bean (`lcsh72_we_jb3`): un Linux 3.4.5 con soporte de MediaTek. Tiene otro panel (DSI FWVGA) y otra memoria (eMMC), y el Y220 tiene un ILI9488 de 320x480 y NAND. Entre el 8 y el 23 de octubre de 2026 hice **26 commits** y compilé kernels numerados hasta el `#98` (el número es el contador de compilaciones). Esto es lo que arreglé.
 
 ## Cronología
 
 | Kernel | Qué cambió |
 |---|---|
-| `#7` | Primer intento como recovery: el táctil no aparece (`I2C transfer error` del msg2133) |
-| `#16` | El panel se reconoce, pero faltan las teclas capacitivas |
-| `#59` | Kernel fijo del TWRP, con teclas y LED de botones |
 | `#57` | Arranque de la imagen de fábrica hasta el launcher, con teclas, altavoz, cámara y acelerómetro |
 | `#76` | Wi-Fi arrancando bien (resultó no ser un fallo del kernel, ver más abajo) |
 | `#90` | Tabla de particiones NAND, zram, menos ruido en el log y colores de cámara |
