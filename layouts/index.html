@@ -16,6 +16,44 @@
 {{ partial "section.html" (dict "id" "research" "items" $data.research) }}
 {{ partial "section.html" (dict "id" "software" "items" $data.software) }}
 
+{{- $cv := hugo.Data.cv }}
+{{- $lang := site.Language.Lang }}
+<section id="experiencia" aria-labelledby="experiencia-title">
+  <header class="section-head">
+    <h2 id="experiencia-title">{{ i18n "experienceTitle" }}</h2>
+    <p>{{ i18n "experienceLead" }}</p>
+  </header>
+  <h3 class="sub">{{ i18n "experienceJobs" }}</h3>
+  <ol class="timeline">
+    {{- range $cv.jobs }}
+    <li>
+      <article class="job">
+        <header>
+          <h4>{{ index .role $lang }} · {{ .company }}</h4>
+          <p class="when">{{ index .period $lang }} — {{ index .kind $lang }}</p>
+        </header>
+        <ul class="chips" aria-label="{{ i18n "experienceDuties" }}">
+          {{- range .duties }}<li>{{ index . $lang }}</li>{{ end }}
+        </ul>
+        <ul class="bullets">
+          {{- range .highlights }}<li>{{ index . $lang }}</li>{{ end }}
+        </ul>
+      </article>
+    </li>
+    {{- end }}
+  </ol>
+  <h3 class="sub">{{ i18n "experienceEducation" }}</h3>
+  <ul class="edu">
+    {{- range $cv.education }}
+    <li><strong>{{ .school }}</strong><span>{{ index .title $lang }}</span><span class="when">{{ index .period $lang }}</span></li>
+    {{- end }}
+  </ul>
+  <h3 class="sub">{{ i18n "experienceOther" }}</h3>
+  <ul class="bullets">
+    {{- range $cv.other }}<li>{{ index . $lang }}</li>{{ end }}
+  </ul>
+</section>
+
 {{- if and $blog $blog.RegularPages }}
 <section id="blog" aria-labelledby="blog-title">
   <header class="section-head">

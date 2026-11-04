@@ -1,0 +1,155 @@
+{
+ "jobs": [
+  {
+   "company": "FitSoftware",
+   "kind": {
+    "es": "Consultora de software",
+    "en": "Software consultancy"
+   },
+   "role": {
+    "es": "Analista programador",
+    "en": "Programmer analyst"
+   },
+   "period": {
+    "es": "Feb. 2018 – presente",
+    "en": "Feb 2018 – present"
+   },
+   "duties": [
+    {
+     "es": "Interfaces web",
+     "en": "Web interfaces"
+    },
+    {
+     "es": "Consumo y creación de APIs",
+     "en": "Building and consuming APIs"
+    },
+    {
+     "es": "Apps Android nativas e híbridas",
+     "en": "Native and hybrid Android apps"
+    },
+    {
+     "es": "PWAs",
+     "en": "PWAs"
+    }
+   ],
+   "highlights": [
+    {
+     "es": "LMS para FITLearning (JavaScript y .NET Core).",
+     "en": "LMS for FITLearning (JavaScript and .NET Core)."
+    },
+    {
+     "es": "FIT ERP, el ERP propio de la empresa (Angular y .NET Core).",
+     "en": "FIT ERP, the company's own ERP (Angular and .NET Core)."
+    },
+    {
+     "es": "SIT API (ASP.NET Framework) y mantenimiento del POS (PowerBuilder 9) de TOPSA, con integración a la API de Ripley.",
+     "en": "SIT API (ASP.NET Framework) and maintenance of TOPSA's POS (PowerBuilder 9), integrated with Ripley's API."
+    },
+    {
+     "es": "Interfaz API (ASP.NET Framework) para la conexión internacional con la sede de GrandVision en Holanda (master data).",
+     "en": "API interface (ASP.NET Framework) for the international link with GrandVision's Netherlands headquarters (master data)."
+    },
+    {
+     "es": "Aplicaciones para COES (ASP.NET MVC), el condominio El Palmar (Angular y .NET Core) y Atlantica Yield (MVC y .NET Core).",
+     "en": "Applications for COES (ASP.NET MVC), El Palmar condominium (Angular and .NET Core) and Atlantica Yield (MVC and .NET Core)."
+    },
+    {
+     "es": "Apps móviles para startups y empresas: KeyParty (Android Java), Resolve (Ionic, con dashboard en Angular), LikeIU (Ionic 4), GlobalClub (Flutter) y la cadena de café RUTTA (Ionic 4); soporte de LavanderiApp.",
+     "en": "Mobile apps for startups and companies: KeyParty (Android Java), Resolve (Ionic, with an Angular dashboard), LikeIU (Ionic 4), GlobalClub (Flutter) and the RUTTA coffee chain (Ionic 4); support for LavanderiApp."
+    },
+    {
+     "es": "Publicación en Play Store y App Store de la app móvil del banco Cencosud.",
+     "en": "Published the Cencosud bank mobile app on the Play Store and App Store."
+    }
+   ]
+  },
+  {
+   "company": "ITLand",
+   "kind": {
+    "es": "Consultora de software",
+    "en": "Software consultancy"
+   },
+   "role": {
+    "es": "Desarrollador frontend",
+    "en": "Frontend developer"
+   },
+   "period": {
+    "es": "Abr. 2017 – feb. 2018",
+    "en": "Apr 2017 – Feb 2018"
+   },
+   "duties": [
+    {
+     "es": "Interfaces web",
+     "en": "Web interfaces"
+    },
+    {
+     "es": "Consumo y creación de APIs",
+     "en": "Building and consuming APIs"
+    },
+    {
+     "es": "Apps híbridas",
+     "en": "Hybrid apps"
+    }
+   ],
+   "highlights": [
+    {
+     "es": "Sitios web con frontoffice (Vue.js, o JS y PHP) y backoffice en Angular para la consultora inmobiliaria GAB y el concesionario Limautos.",
+     "en": "Websites with a frontoffice (Vue.js, or JS and PHP) and an Angular backoffice for the real-estate firm GAB and the car dealer Limautos."
+    },
+    {
+     "es": "Migración de la extranet y soporte web de Crédito Salsa (Angular).",
+     "en": "Extranet migration and web support for Crédito Salsa (Angular)."
+    },
+    {
+     "es": "App móvil de acceso crediticio (Ionic), aplicativo ASP.NET para Deloitte, sitios para ActumCapital y CITEMadera, chatbot de Messenger para UNACEN y app móvil para La Panka.",
+     "en": "Credit-access mobile app (Ionic), an ASP.NET application for Deloitte, sites for ActumCapital and CITEMadera, a Messenger chatbot for UNACEN and a mobile app for La Panka."
+    }
+   ]
+  }
+ ],
+ "education": [
+  {
+   "school": "Universidad Peruana de Ciencias Aplicadas (UPC)",
+   "title": {
+    "es": "Ingeniería de sistemas",
+    "en": "Systems engineering"
+   },
+   "period": {
+    "es": "Desde ene. 2020",
+    "en": "Since Jan 2020"
+   }
+  },
+  {
+   "school": "SENATI",
+   "title": {
+    "es": "Desarrollo de software",
+    "en": "Software development"
+   },
+   "period": {
+    "es": "2016 – 2019",
+    "en": "2016 – 2019"
+   }
+  },
+  {
+   "school": "Universidad Privada TELESUP",
+   "title": {
+    "es": "Administración de empresas",
+    "en": "Business administration"
+   },
+   "period": {
+    "es": "2013 – 2015",
+    "en": "2013 – 2015"
+   }
+  }
+ ],
+ "other": [
+  {
+   "es": "Certificación en desarrollo de aplicaciones móviles, Universidad Complutense de Madrid con Google.",
+   "en": "Mobile app development certification, Universidad Complutense de Madrid with Google."
+  },
+  {
+   "es": "Inglés: intermedio.",
+   "en": "English: intermediate."
+  }
+ ]
+}
