@@ -1046,5 +1046,76 @@
    "oncrpc",
    "watchdog"
   ]
+ },
+ "apx": {
+  "term": {
+   "es": "APX",
+   "en": "APX"
+  },
+  "def": {
+   "es": "Modo de recuperación de bajo nivel de los procesadores NVIDIA Tegra (incluido el Tegra 4i). Se entra sosteniendo las teclas de volumen al conectar el USB; el chip arranca sin firmware propio y espera que una herramienta como nvflash le suba uno por USB.",
+   "en": "Low-level recovery mode on NVIDIA Tegra processors (including the Tegra 4i). Entered by holding the volume keys while plugging in USB; the chip boots with no firmware of its own and waits for a tool like nvflash to upload one over USB."
+  },
+  "see": [
+   "nvflash",
+   "bct"
+  ]
+ },
+ "bct": {
+  "term": {
+   "es": "BCT",
+   "en": "BCT"
+  },
+  "def": {
+   "es": "Boot Configuration Table: bloque binario que describe al Tegra cómo está conectada su memoria RAM y dónde está cada partición. nvflash lo necesita para hablarle al chip, y lo firma de nuevo cada vez que graba algo.",
+   "en": "Boot Configuration Table: a binary block that tells the Tegra how its RAM is wired and where each partition sits. nvflash needs it to talk to the chip, and re-signs it every time it writes something."
+  },
+  "see": [
+   "apx",
+   "nvflash",
+   "rbl"
+  ]
+ },
+ "ebt": {
+  "term": {
+   "es": "EBT",
+   "en": "EBT"
+  },
+  "def": {
+   "es": "Early Boot Loader de NVIDIA Tegra: la partición del bootloader donde vive la verificación de firma que un recovery personalizado tiene que superar.",
+   "en": "NVIDIA Tegra's Early Boot Loader: the bootloader partition that holds the signature check a custom recovery has to get past."
+  },
+  "see": [
+   "rbl",
+   "apx"
+  ]
+ },
+ "nvflash": {
+  "term": {
+   "es": "nvflash",
+   "en": "nvflash"
+  },
+  "def": {
+   "es": "Herramienta oficial de NVIDIA para grabar particiones en un Tegra por USB en modo APX. A diferencia de escribir los sectores a mano, actualiza también los metadatos de integridad del BCT y del bootloader.",
+   "en": "NVIDIA's official tool to write partitions on a Tegra over USB in APX mode. Unlike writing the sectors by hand, it also updates the BCT's and the bootloader's integrity metadata."
+  },
+  "see": [
+   "apx",
+   "bct"
+  ]
+ },
+ "rbl": {
+  "term": {
+   "es": "RBL",
+   "en": "RBL"
+  },
+  "def": {
+   "es": "Recovery Boot Loader de NVIDIA Tegra: la etapa de respaldo a la que el chip cae si el EBT no arranca. Suele dejarse intacta al parchear el EBT, para no perder esa red de seguridad.",
+   "en": "NVIDIA Tegra's Recovery Boot Loader: the fallback stage the chip falls back to if the EBT fails to boot. It is usually left untouched when patching the EBT, to keep that safety net."
+  },
+  "see": [
+   "ebt",
+   "apx"
+  ]
  }
 }
