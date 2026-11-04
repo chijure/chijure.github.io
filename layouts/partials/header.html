@@ -8,11 +8,11 @@
       <li><a href="{{ $home }}#tools">{{ i18n "section_tools_title" }}</a></li>
       <li><a href="{{ $home }}#research">{{ i18n "nav_research" }}</a></li>
       <li><a href="{{ $home }}#software">{{ i18n "nav_software" }}</a></li>
-      <li><a href="{{ $home }}#experiencia">{{ i18n "nav_experience" }}</a></li>
-      <li><a href="{{ $home }}#perfil">{{ i18n "aboutTitle" }}</a></li>
       {{- if and $blog $blog.RegularPages }}
       <li><a href="{{ $blog.RelPermalink }}">{{ i18n "nav_blog" }}</a></li>
       {{- end }}
+      <li><a href="{{ $home }}#experiencia">{{ i18n "nav_experience" }}</a></li>
+      <li><a href="{{ $home }}#perfil">{{ i18n "aboutTitle" }}</a></li>
       <li><a href="{{ printf "/%s/" (i18n "glossary_slug") | relLangURL }}">{{ i18n "nav_glossary" }}</a></li>
     </ul>
   </nav>

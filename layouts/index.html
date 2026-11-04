@@ -16,6 +16,18 @@
 {{ partial "section.html" (dict "id" "research" "items" $data.research) }}
 {{ partial "section.html" (dict "id" "software" "items" $data.software) }}
 
+{{- if and $blog $blog.RegularPages }}
+<section id="blog" aria-labelledby="blog-title">
+  <header class="section-head">
+    <h2 id="blog-title">{{ i18n "latest_posts" }}</h2>
+  </header>
+  <ul class="post-list">
+    {{- range first 3 $blog.RegularPages }}{{ partial "post-item.html" . }}{{ end }}
+  </ul>
+  <p class="more"><a href="{{ $blog.RelPermalink }}">{{ i18n "all_posts" }}</a></p>
+</section>
+{{- end }}
+
 {{- $cv := hugo.Data.cv }}
 {{- $lang := site.Language.Lang }}
 <section id="experiencia" aria-labelledby="experiencia-title">
@@ -55,18 +67,6 @@
     {{- range $cv.other }}<li>{{ index . $lang }}</li>{{ end }}
   </ul>
 </section>
-
-{{- if and $blog $blog.RegularPages }}
-<section id="blog" aria-labelledby="blog-title">
-  <header class="section-head">
-    <h2 id="blog-title">{{ i18n "latest_posts" }}</h2>
-  </header>
-  <ul class="post-list">
-    {{- range first 3 $blog.RegularPages }}{{ partial "post-item.html" . }}{{ end }}
-  </ul>
-  <p class="more"><a href="{{ $blog.RelPermalink }}">{{ i18n "all_posts" }}</a></p>
-</section>
-{{- end }}
 
 <section id="perfil" aria-labelledby="perfil-title" class="about">
   <header class="section-head">
