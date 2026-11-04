@@ -1,7 +1,7 @@
 ---
 title: "The LG G2 Mini doesn't use LK: unlocking a Tegra 4i with nvflash"
 date: 2026-11-03
-description: "The G2 Mini (D625) doesn't have the MediaTek LK bootloader its siblings do: it's an NVIDIA Tegra 4i, and there the unlock path is completely different, with its own low-level recovery mode and its own flashing tool."
+description: "The G2 Mini (D625) is a Tegra 4i, not a MediaTek LK phone: unlocking works differently, with its own low-level recovery mode and flashing tool."
 tags: [android, bootloader, tegra, e400]
 draft: false
 ---

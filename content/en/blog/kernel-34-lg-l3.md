@@ -1,7 +1,7 @@
 ---
 title: "Kernel 3.4 for the LG L3 (E400): from a phone that rebooted itself to CM10.1 with GPS, sensors and camera"
 date: 2026-11-03
-description: "The LG Optimus L3 (MSM7225A) shipped with a 2.6.38 kernel. Moving it to 3.4 to run Android 4.2.2 was a chain of silent reboots, and almost all of them had the same cause: the modem."
+description: "The LG L3 (MSM7225A) shipped with kernel 2.6.38. Moving it to 3.4 for Android 4.2.2 was a chain of silent reboots, nearly all caused by the modem."
 tags: [android, kernel, e400, qualcomm]
 draft: false
 ---

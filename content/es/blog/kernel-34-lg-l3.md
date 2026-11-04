@@ -1,7 +1,7 @@
 ---
 title: "Kernel 3.4 para el LG L3 (E400): de un teléfono que se reiniciaba solo a CM10.1 con GPS, sensores y cámara"
 date: 2026-11-03
-description: "El LG Optimus L3 (MSM7225A) traía un kernel 2.6.38. Llevarlo a un 3.4 para correr Android 4.2.2 fue una cadena de reinicios sin log, y casi todos tuvieron la misma causa: el módem."
+description: "El LG L3 (MSM7225A) traía un kernel 2.6.38. Llevarlo a 3.4 para Android 4.2.2 fue una cadena de reinicios sin log, casi todos por el módem."
 tags: [android, kernel, e400, qualcomm]
 draft: false
 ---
