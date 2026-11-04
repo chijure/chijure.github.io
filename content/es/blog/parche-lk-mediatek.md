@@ -1,7 +1,7 @@
 ---
 title: "Un parche, tres teléfonos: el bootloader LK de MediaTek"
 date: 2026-10-17
-description: "El mismo parche al bootloader LK, con ajustes, sirvió para tres LG distintos (E450g, E440g, L50/D213). La primera versión parecía funcionar y dejaba el teléfono en un bucle de arranque."
+description: "Un mismo parche al bootloader LK sirvió para tres LG, con ajustes. La primera versión parecía funcionar y dejaba el teléfono en bucle de arranque."
 tags: [android, bootloader, mediatek]
 draft: false
 ---

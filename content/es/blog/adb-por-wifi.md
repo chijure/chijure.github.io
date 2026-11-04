@@ -1,7 +1,7 @@
 ---
 title: "adb por Wi-Fi, y por qué se pierde justo cuando más lo necesitas"
 date: 2026-11-02
-description: "adb tcpip es cómodo para probar el modo host USB de un teléfono, pero depende del Wi-Fi para todo. Un error que acabo de cometer muestra exactamente cómo se pierde la conexión."
+description: "adb tcpip permite depurar por Wi-Fi mientras el USB hace de host, pero depende de la red: un error mío muestra cómo se pierde la conexión."
 tags: [android, adb]
 draft: false
 ---

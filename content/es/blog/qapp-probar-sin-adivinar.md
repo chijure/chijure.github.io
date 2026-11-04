@@ -1,7 +1,7 @@
 ---
 title: "QApp: probar una ROM sin adivinar"
 date: 2026-11-02
-description: "Nació para confirmar una batería gastada en el LG D625. Hoy es una app que corre un pase automático de pruebas en cualquier Android desde 2.2, con un informe que sobrevive a un reinicio del teléfono."
+description: "Nació para confirmar una batería gastada en el LG D625. Hoy corre pruebas automáticas en Android 2.2+ con un informe que sobrevive a reinicios."
 tags: [android, qapp]
 draft: false
 ---

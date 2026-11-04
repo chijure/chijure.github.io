@@ -1,9 +1,11 @@
 ---
 title: "What doesn't exist in the Android 2.3 shell (and what does, against what I believed)"
 date: 2026-11-02
-description: "input tap, swipe and am force-stop don't exist on Gingerbread. The shell's $((...)) arithmetic, on the other hand, does work: I checked it on a real phone after assuming the opposite."
+description: "input tap, swipe and am force-stop don't exist on Gingerbread, but the shell's $((...)) arithmetic does. I checked it on a real phone."
 tags: [android, gingerbread]
 draft: false
+slug: what-gingerbread-lacks
+aliases: [/blog/que-no-existe-gingerbread/]
 ---
 
 Debugging a {{< g "gingerbread" >}} (Android 2.3) phone over `adb shell` has traps that don't exist on newer versions, and it's worth knowing them before writing a script that hangs halfway through a test.

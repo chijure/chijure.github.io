@@ -1,7 +1,7 @@
 ---
 title: "USB OTG on the LG C660: what I measured and why it does not work"
 date: 2026-11-02
-description: "I enabled the USB host stack in the 2.6.35 kernel, forced host mode and measured the PHY. With a flash drive and with a mouse, the D+ and D- lines never move."
+description: "I enabled the 2.6.35 kernel's USB host, forced host mode and measured the PHY: with a flash drive or mouse, D+ and D- never move."
 tags: [android, kernel, usb]
 draft: false
 ---

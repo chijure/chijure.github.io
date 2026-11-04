@@ -1,9 +1,11 @@
 ---
 title: "Testing the Huawei Y220-U05 kernel without risking the ROM: TWRP first"
 date: 2026-10-12
-description: "Before booting the Y220-U05's Android with my own kernel, I tried every version as a recovery. This is how I built that test bench and what the first kernels taught me."
+description: "Before booting the Y220-U05's Android with my own kernel I tried each version as a recovery. How I built that test bench and what it taught me."
 tags: [android, kernel, y220, twrp]
 draft: false
+slug: y220-twrp-first
+aliases: [/blog/y220-twrp-primero/]
 ---
 
 The **Huawei Ascend Y220-U05** uses a MediaTek **{{< g "mt6572" "MT6572" >}}** and ships with Android 2.3.6 (build `C482B206SP05`). For the {{< g "cm" "CyanogenMod" >}} port I needed my own {{< g "kernel" "kernel" >}}, and the starting point was a **donor** tree from Longcheer for Jelly Bean (`lcsh72_we_jb3`): a Linux 3.4.5 with MediaTek support (its history shows it imported from a Lenovo project in 2014).

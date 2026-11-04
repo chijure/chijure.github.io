@@ -1,9 +1,11 @@
 ---
 title: "One patch, three phones: MediaTek's LK bootloader"
 date: 2026-10-17
-description: "The same patch to the LK bootloader, with adjustments, worked on three different LG phones (E450g, E440g, L50/D213). The first version looked like it worked and left the phone in a boot loop."
+description: "One LK bootloader patch, with tweaks, worked on three LG phones. The first version seemed fine and left the phone in a boot loop."
 tags: [android, bootloader, mediatek]
 draft: false
+slug: mediatek-lk-patch
+aliases: [/blog/parche-lk-mediatek/]
 ---
 
 The [LG D625](https://github.com/chijure-android-system-development/lg-d625-tegra-bootloader-patch) (Tegra 4i) needed its own unlock path, with `nvflash`. A different group of older LG phones — the **L5 II (E450g)**, the **L4 II (E440g)** and the **L50 (D213)** — share something that sets them apart: the same MediaTek **LK** bootloader, on the same chip family (MT6575 and MT6572). That coincidence is what let one piece of analysis work, with adjustments, for all three.

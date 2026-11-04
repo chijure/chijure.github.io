@@ -4,20 +4,42 @@
 {{- $title := cond $isHome (i18n "title") (printf "%s — %s" .Title site.Title) }}
 {{- $desc := cond $isHome (i18n "site_description") (.Description | default (i18n "site_description")) }}
 <title>{{ $title }}</title>
-<meta name="description" content="{{ $desc | plainify | truncate 200 }}">
+<meta name="description" content="{{ $desc | plainify | truncate 160 }}">
 <meta name="theme-color" content="#090d0c">
 <link rel="canonical" href="{{ .Permalink }}">
 {{- range .AllTranslations }}
 <link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">
+{{- if eq .Language.Lang hugo.Sites.Default.Language.Lang }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{- end }}
 {{- end }}
 <meta property="og:title" content="{{ $title }}">
-<meta property="og:description" content="{{ $desc | plainify | truncate 200 }}">
+<meta property="og:description" content="{{ $desc | plainify | truncate 160 }}">
 <meta property="og:type" content="{{ cond (eq .Kind "page") "article" "website" }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:locale" content="{{ site.Language.Locale }}">
-{{- with .OutputFormats.Get "RSS" }}
-<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+{{- $img := absURL "og-default.png" }}
+<meta property="og:image" content="{{ $img }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ site.Title }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ $img }}">
+{{- if eq .Kind "page" }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- with .Params.tags }}{{ range . }}
+<meta property="article:tag" content="{{ . }}">
+{{- end }}{{ end }}
+<script type="application/ld+json">
+{{- dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" .Title "description" $desc "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "inLanguage" site.Language.Locale "mainEntityOfPage" .Permalink "author" (dict "@type" "Person" "name" site.Title "url" site.Params.github) | jsonify | safeJS }}
+</script>
 {{- end }}
+{{- /* RSS del blog en todas las páginas (los posts no tienen RSS propio) */}}
+{{- with site.GetPage "/blog" }}{{ with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- end }}{{ end }}
 <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
 {{- $css := resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">

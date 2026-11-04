@@ -1,7 +1,7 @@
 ---
 title: "Parches de plataforma o device tree: por qué elijo HALs y shims"
 date: 2026-10-22
-description: "En casi todos los ports repito la misma regla: evitar parches al código de la plataforma de Android y resolver las diferencias de hardware en el árbol del dispositivo, con HALs y pequeños puentes. Tres ejemplos reales de por qué."
+description: "Mi regla en los ports: no parchear la plataforma de Android y resolver el hardware en el árbol del dispositivo con HALs y shims. Tres ejemplos."
 tags: [android, device-tree]
 draft: false
 ---

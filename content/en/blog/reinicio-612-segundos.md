@@ -1,9 +1,11 @@
 ---
 title: "A reboot at exactly 612 seconds"
 date: 2026-10-31
-description: "The LG L3 with a 3.4 kernel reboots on its own, with no panic, always between 609 and 616 seconds of uptime. With the 2.6.38 kernel and the same ramdisk, it does not happen. This is what I ruled out and what is still open."
+description: "The LG L3 on kernel 3.4 reboots by itself, no panic, at 609–616 s of uptime; on 2.6.38 it doesn't. What I ruled out and what's still open."
 tags: [android, kernel, e400]
 draft: false
+slug: reboot-at-612-seconds
+aliases: [/blog/reinicio-612-segundos/]
 ---
 
 > **Update, 3 November 2026:** this reboot stopped happening after restoring the phone's full factory firmware (modem and NV included), with the same 3.4 kernel. So the conclusion below, "it is not the modem", was too strong. I tell the story in [Kernel 3.4 for the LG L3]({{< relref "kernel-34-lg-l3.md" >}}).

@@ -1,7 +1,7 @@
 ---
 title: "La batería del C660: qué se puede medir sin fuel gauge"
 date: 2026-11-02
-description: "El LG C660 no tiene un chip medidor de batería: todo el voltaje viene filtrado por RPC desde el módem, en saltos de 17 mV. Esto es lo que se puede concluir con esa limitación, y lo que no."
+description: "El LG C660 no tiene medidor de batería: el voltaje llega filtrado desde el módem en saltos de 17 mV. Qué se puede concluir así, y qué no."
 tags: [android, battery, c660]
 draft: false
 ---

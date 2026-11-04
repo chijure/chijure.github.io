@@ -1,9 +1,11 @@
 ---
 title: "adb over Wi-Fi, and why it drops right when you need it most"
 date: 2026-11-02
-description: "adb tcpip is handy for testing a phone's USB host mode, but it depends on Wi-Fi for everything. A mistake I just made shows exactly how the connection gets lost."
+description: "adb tcpip lets you debug over Wi-Fi while USB is in host mode, but everything depends on the network: a mistake of mine shows how the link drops."
 tags: [android, adb]
 draft: false
+slug: adb-over-wifi
+aliases: [/blog/adb-por-wifi/]
 ---
 
 When I test {{< g "otg" >}} in {{< g "host-mode" >}}, the phone's USB port stops being useful for {{< g "adb" >}}: it's busy talking to the flash drive or mouse plugged into it. The fix is `adb` over Wi-Fi:

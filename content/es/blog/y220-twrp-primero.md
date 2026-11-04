@@ -1,7 +1,7 @@
 ---
 title: "Probar el kernel del Huawei Y220-U05 sin arriesgar la ROM: TWRP primero"
 date: 2026-10-12
-description: "Antes de arrancar el Android del Y220-U05 con un kernel propio, probé cada versión como recovery. Así monté ese banco de pruebas y qué enseñaron los primeros kernels."
+description: "Antes de arrancar Android en el Y220-U05 con kernel propio, probé cada versión como recovery. Así monté el banco de pruebas y qué enseñó."
 tags: [android, kernel, y220, twrp]
 draft: false
 ---

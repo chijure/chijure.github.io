@@ -1,7 +1,7 @@
 ---
 title: "Kernel 3.4.5 para el Huawei Y220-U05: 26 commits de un árbol donante a un Gingerbread estable"
 date: 2026-10-23
-description: "El Y220-U05 (MediaTek MT6572) corre un kernel sacado de un árbol donante. Esto fue lo que hubo que arreglar, del arranque al Wi-Fi, la cámara, la carga con el teléfono apagado y el hotspot."
+description: "El kernel del Y220-U05 (MT6572) salió de un árbol donante. Lo que hubo que arreglar: arranque, Wi-Fi, cámara, carga apagado y hotspot."
 tags: [android, kernel, y220, mediatek]
 draft: false
 ---

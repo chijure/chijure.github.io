@@ -1,9 +1,11 @@
 ---
 title: "Screenshotting Android 2.3 without screencap"
 date: 2026-11-02
-description: "Gingerbread has no screencap. The alternative is reading /dev/graphics/fb0 directly, and for that you need the panel's real stride, which almost never matches the screen's visible width."
+description: "Gingerbread has no screencap. Read /dev/graphics/fb0 directly and use the panel's real stride, which almost never matches the visible width."
 tags: [android, gingerbread]
 draft: false
+slug: gingerbread-screen-capture
+aliases: [/blog/capturar-pantalla-gingerbread/]
 ---
 
 `adb shell screencap` arrived in Android 4.0. On {{< g "gingerbread" >}} (2.3) it doesn't exist, so taking a screenshot of an old phone means reading the {{< g "framebuffer" >}} directly: `/dev/graphics/fb0`.

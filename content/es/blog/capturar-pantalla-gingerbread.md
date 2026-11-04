@@ -1,7 +1,7 @@
 ---
 title: "Capturar pantalla en Android 2.3 sin screencap"
 date: 2026-11-02
-description: "Gingerbread no tiene screencap. La alternativa es leer /dev/graphics/fb0 directamente, y para eso hay que conocer el stride real del panel, que casi nunca coincide con el ancho de la pantalla."
+description: "Gingerbread no tiene screencap. Hay que leer /dev/graphics/fb0 y conocer el stride real del panel, que casi nunca coincide con el ancho."
 tags: [android, gingerbread]
 draft: false
 ---

@@ -1,7 +1,7 @@
 ---
 title: "USB OTG en el LG L3 (E400): modo host con un interruptor de software"
 date: 2026-11-01
-description: "El kernel stock del L3 ya traía el host USB. Faltaba montar el disco y un interruptor para forzar el modo host, porque el pin ID del micro-USB no llega al procesador."
+description: "El kernel stock del L3 ya traía host USB. Faltaba montar el disco y un interruptor para forzar el modo host: el pin ID no llega al procesador."
 tags: [android, usb, e400]
 draft: false
 ---

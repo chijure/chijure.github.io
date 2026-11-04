@@ -1,6 +1,7 @@
 baseURL = 'https://chijure.github.io/'
 title = 'Jhuan Reategui Solis'
 enableRobotsTXT = true
+enableGitInfo = true
 timeZone = 'America/Lima'
 
 # Español por defecto; cada idioma en su carpeta (/es/ y /en/).
@@ -42,3 +43,7 @@ defaultContentLanguageInSubdir = true
 [sitemap]
   changeFreq = 'monthly'
   priority = 0.5
+
+# La fecha de modificación sale del último commit (si no, de la fecha del artículo).
+[frontmatter]
+  lastmod = [':git', 'lastmod', 'date', 'publishDate']

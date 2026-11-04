@@ -1,7 +1,7 @@
 ---
 title: "USB OTG on the LG L3 (E400): host mode with a software switch"
 date: 2026-11-01
-description: "The L3's stock kernel already had the USB host. What was missing was mounting the disk and a switch to force host mode, because the micro-USB ID pin does not reach the processor."
+description: "The L3's stock kernel already had USB host. Missing: mounting the disk and a switch to force host mode, since the ID pin never reaches the CPU."
 tags: [android, usb, e400]
 draft: false
 ---

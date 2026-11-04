@@ -1,9 +1,11 @@
 ---
 title: "QApp: testing a ROM without guessing"
 date: 2026-11-02
-description: "Born to confirm a worn-out battery on the LG D625. Today it's an app that runs an automatic test pass on any Android from 2.2 onward, with a report that survives a phone reset."
+description: "Born to confirm a worn-out battery on the LG D625. Now it runs automatic tests on Android 2.2+ with a report that survives a reboot."
 tags: [android, qapp]
 draft: false
+slug: qapp-testing-without-guessing
+aliases: [/blog/qapp-probar-sin-adivinar/]
 ---
 
 Porting a ROM to an old phone comes with a problem that isn't about software: when something fails, it isn't always clear whether the ROM is at fault or the hardware itself, worn down by years of use. **QApp** was born to take that doubt out of the equation.

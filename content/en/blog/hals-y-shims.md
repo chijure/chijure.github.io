@@ -1,9 +1,11 @@
 ---
 title: "Platform patches or device tree: why I choose HALs and shims"
 date: 2026-10-22
-description: "In almost every port I repeat the same rule: avoid patching Android's platform code and solve hardware differences in the device tree instead, with HALs and small bridges. Three real examples of why."
+description: "My rule in ports: don't patch Android's platform code; solve hardware differences in the device tree with HALs and shims. Three real examples."
 tags: [android, device-tree]
 draft: false
+slug: hals-and-shims
+aliases: [/blog/hals-y-shims/]
 ---
 
 If you look at the device trees I have published, you will find the same sentence repeated: *"all through a {{< g "device-tree" >}} HAL, like on the Y220"*. It is not an abstract rule, it is a decision I make on every port, and one I have paid to undo when I did not follow it. This is what it means and why I prefer it.

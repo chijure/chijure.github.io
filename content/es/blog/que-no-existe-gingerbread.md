@@ -1,7 +1,7 @@
 ---
 title: "Qué no existe en la shell de Android 2.3 (y qué sí, contra lo que creía)"
 date: 2026-11-02
-description: "input tap, swipe y am force-stop no existen en Gingerbread. La aritmética $((...)) de la shell, en cambio, sí funciona: lo comprobé en un teléfono real después de haber dado por hecho lo contrario."
+description: "input tap, swipe y am force-stop no existen en Gingerbread, pero la aritmética $((...)) de la shell sí. Lo comprobé en un teléfono real."
 tags: [android, gingerbread]
 draft: false
 ---

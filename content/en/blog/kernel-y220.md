@@ -1,9 +1,11 @@
 ---
 title: "A 3.4.5 kernel for the Huawei Y220-U05: 26 commits from a donor tree to a stable Gingerbread"
 date: 2026-10-23
-description: "The Y220-U05 (MediaTek MT6572) runs a kernel taken from a donor tree. This is what had to be fixed, from boot to Wi-Fi, the camera, power-off charging and the hotspot."
+description: "The Y220-U05 (MT6572) runs a kernel from a donor tree. What had to be fixed: boot, Wi-Fi, camera, power-off charging and the hotspot."
 tags: [android, kernel, y220, mediatek]
 draft: false
+slug: y220-kernel
+aliases: [/blog/kernel-y220/]
 ---
 
 This is the second of two articles about the {{< g "kernel" "kernel" >}} of the **Huawei Ascend Y220-U05** (MediaTek **{{< g "mt6572" "MT6572" >}}**, Android 2.3.6 {{< g "stock" "stock" >}}). In the [first]({{< relref "y220-twrp-primero.md" >}}) I tell how I tested it in {{< g "twrp" "TWRP" >}} so as not to risk the system. Here are the fixes.

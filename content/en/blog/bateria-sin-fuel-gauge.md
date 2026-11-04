@@ -1,9 +1,11 @@
 ---
 title: "The C660's battery: what you can measure without a fuel gauge"
 date: 2026-11-02
-description: "The LG C660 has no battery-metering chip: every voltage reading comes filtered over RPC from the modem, in 17 mV steps. This is how far that limitation lets you go, and where it doesn't."
+description: "The LG C660 has no battery gauge chip: voltage reaches the OS filtered from the modem in 17 mV steps. What you can conclude with that, and what not."
 tags: [android, battery, c660]
 draft: false
+slug: battery-without-fuel-gauge
+aliases: [/blog/bateria-sin-fuel-gauge/]
 ---
 
 When you suspect a worn battery, the right tool is a multimeter. What I had on hand was the LG C660 and [QApp]({{< relref "qapp-probar-sin-adivinar.md" >}}), so this is how far software alone can take you, and where it has to stop.

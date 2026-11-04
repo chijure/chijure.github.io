@@ -18,7 +18,8 @@ sin Node), en español (`/es/`) e inglés (`/en/`).
 ## Escribir un artículo
 
 Crear el archivo con el **mismo nombre** en cada idioma (así Hugo los enlaza como traducciones
-y el selector ES/EN salta de uno a otro):
+y el selector ES/EN salta de uno a otro). La URL en inglés se cambia con `slug:` en el front matter,
+sin renombrar el archivo (así la traducción sigue enlazada):
 
 ```
 content/es/blog/mi-articulo.md
@@ -29,7 +30,8 @@ content/en/blog/mi-articulo.md
 ---
 title: "Título"
 date: 2026-11-02
-description: "Resumen para el listado y para compartir el enlace."
+description: "Resumen de hasta ~155 caracteres, para el listado y para compartir el enlace."
+slug: my-article   # solo en la versión EN, si quieres una URL en inglés
 tags: [android, kernel]
 draft: true
 ---

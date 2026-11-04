@@ -1,7 +1,7 @@
 ---
 title: "Un reinicio exacto a los 612 segundos"
 date: 2026-10-31
-description: "El LG L3 con kernel 3.4 se reinicia solo, sin panic, siempre entre los 609 y los 616 segundos de actividad. Con el kernel 2.6.38 y el mismo ramdisk, no pasa. Esto es lo que descarté y lo que queda sin resolver."
+description: "El LG L3 con kernel 3.4 se reinicia solo, sin panic, entre los 609 y 616 s de actividad; con el 2.6.38 no. Qué descarté y qué sigue abierto."
 tags: [android, kernel, e400]
 draft: false
 ---
