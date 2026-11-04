@@ -29,15 +29,17 @@
     <li>
       <article class="job">
         <header>
-          <h4>{{ index .role $lang }} · {{ .company }}</h4>
+          <h4>{{ .company }}</h4>
           <p class="when">{{ index .period $lang }} — {{ index .kind $lang }}</p>
         </header>
-        <ul class="chips" aria-label="{{ i18n "experienceDuties" }}">
-          {{- range .duties }}<li>{{ index . $lang }}</li>{{ end }}
-        </ul>
-        <ul class="bullets">
-          {{- range .highlights }}<li>{{ index . $lang }}</li>{{ end }}
-        </ul>
+        {{- range .roles }}
+        <div class="role">
+          <h5>{{ index .role $lang }}{{ with (index .period $lang) }} <span class="when">· {{ . }}</span>{{ end }}</h5>
+          <ul class="bullets">
+            {{- range .highlights }}<li>{{ index . $lang }}</li>{{ end }}
+          </ul>
+        </div>
+        {{- end }}
       </article>
     </li>
     {{- end }}
