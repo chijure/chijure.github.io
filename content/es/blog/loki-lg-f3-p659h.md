@@ -1,5 +1,5 @@
 ---
-title: "TWRP persistente en el LG Optimus F3 P659H: un perfil Loki nuevo"
+title: "TWRP persistente en el LG Optimus F3 P659H: cómo añadí un perfil a Loki"
 date: 2026-11-04
 description: "El P659H rechazaba TWRP con “boot certification verify”. Analicé su aboot, añadí un perfil Loki y conseguí un recovery persistente."
 tags: [android, bootloader, lg, twrp, loki]
@@ -12,13 +12,13 @@ La solución no fue modificar permanentemente `aboot`, sino añadir este modelo 
 
 ## Primero había que encontrar Fastboot
 
-El kernel publicado para la familia `fx3` confirmó que `reboot("bootloader")` escribe el motivo `0x77665500` en la memoria compartida de Qualcomm. El teléfono recibía ese motivo —el siguiente arranque mostraba `lge.r=77665500_20`—, pero aun así no presentaba {{< g "fastboot" "Fastboot" >}}. El análisis de `aboot` explicó por qué: LG había quitado la selección normal del modo Fastboot y solo dejaba su inicialización como salida de error cuando no podía cargar una imagen Android.
+El kernel publicado para la familia `fx3` confirmó que `reboot("bootloader")` escribe el motivo `0x77665500` en la memoria compartida de Qualcomm. El teléfono recibía ese motivo —el siguiente arranque mostraba `lge.r=77665500_20`—, pero aun así no presentaba {{< g "fastboot" "Fastboot" >}}. El análisis de `aboot` explicó por qué: LG había eliminado la forma normal de entrar a Fastboot. Lo único que quedaba era una salida de emergencia: si `aboot` no lograba cargar una imagen Android válida, iniciaba Fastboot.
 
 La prueba controlada consistió en cambiar temporalmente el primer byte de la magia de `boot`, de `ANDROID!` a `XNDROID!`. Con una imagen imposible de reconocer, `aboot` cayó a Fastboot (`18d1:d00d`, producto `FX3_SCA`). Desde allí fue posible probar TWRP con `fastboot boot` y restaurar inmediatamente el `boot.img` original. Esa prueba demostró dos cosas importantes: el kernel y el {{< g "ramdisk" "ramdisk" >}} de TWRP sí eran compatibles con el teléfono, y el fallo de la instalación permanente estaba exclusivamente en la ruta de certificación de LG.
 
 ## Por qué escribir TWRP no bastaba
 
-La imagen TWRP sin modificar se escribió en `recovery` y se volvió a leer completa. Su hash coincidía, de modo que no había un error de escritura ni una partición equivocada. Aun así, `aboot` mostraba “boot certification verify”. El estado estándar `Device unlocked: true` de Fastboot tampoco anulaba esa verificación propietaria para una imagen instalada.
+La imagen TWRP sin modificar se escribió en `recovery` y se volvió a leer completa. Su hash coincidía, de modo que no había un error de escritura ni una partición equivocada. Aun así, `aboot` mostraba “boot certification verify”. El estado `Device unlocked: true` de Fastboot tampoco ayudaba, y por una razón curiosa: **nunca persiste**. En `aboot`, `oem unlock` pone el indicador a `1` en RAM, intenta guardarlo en una partición llamada `devinfo` y responde `OKAY` sin comprobar el resultado. La tabla GPT del P659H no tiene ninguna partición `devinfo`, así que la escritura falla; `oem device-info` muestra `true` solo durante esa sesión y, tras reiniciar, `aboot` no encuentra nada, inicializa los campos a cero y vuelve a mostrar `Device unlocked: false`. (Existe una partición `pad` de 1 KiB, vacía, que probablemente ocupaba ese lugar, pero no lleva el nombre que `aboot` busca.) Por eso el desbloqueo nunca llegó a influir en la verificación de una imagen instalada.
 
 Loki resuelve este problema construyendo una imagen especial. Conserva el kernel y el ramdisk reales, pero hace que `aboot` cargue como ramdisk aparente una página que sobrescribe en RAM el comienzo de su propia función de verificación. El pequeño código colocado allí corrige después la cabecera activa para devolver al kernel las direcciones y tamaños verdaderos. El cambio existe solo durante ese arranque: la partición `aboot` permanece intacta.
 
@@ -35,9 +35,9 @@ El `loki_tool` original reconoció el patrón de código, pero terminó con `Uns
 },
 ```
 
-`check_sigs` es la entrada de la rutina criptográfica que llama el flujo de *secure boot*. El patrón aparece en el archivo en `0x10310`; al corregir la cabecera de carga de `aboot`, su dirección de ejecución es `0x88f102e8`.
+`check_sigs` es la entrada de la rutina criptográfica que llama el flujo de *secure boot*. El patrón aparece en el archivo en el desplazamiento `0x10310`. `aboot` se carga en `0x88f00000` y su cabecera ocupa los primeros `0x28` bytes, de modo que la dirección de ejecución es `0x88f00000 + 0x10310 − 0x28 = 0x88f102e8`.
 
-`hdr` fue la parte difícil. No es cualquier copia de la cabecera Android ni la dirección fija donde se hace una lectura inicial. Es la **cabecera activa** que el flujo común usa justo antes de verificar y arrancar la imagen. En el desensamblado del P659H, `aboot` carga explícitamente `r4 = 0x88f64aa8` y luego consulta:
+`hdr` fue la parte difícil. No es cualquier copia de la cabecera Android ni la dirección fija donde se hace una lectura inicial. Es la **cabecera activa** que el flujo común usa justo antes de verificar y arrancar la imagen. Para encontrarla desensamblé `aboot` con Ghidra y seguí hacia atrás los accesos a los campos de tamaño y dirección del kernel desde `boot_linux_from_mmc`, hasta dar con el registro que los sostenía. En el desensamblado del P659H, `aboot` carga explícitamente `r4 = 0x88f64aa8` y luego consulta:
 
 ```text
 r4 + 0x08  tamaño del kernel
@@ -50,7 +50,7 @@ Son exactamente los campos que el payload de Loki reescribe.
 
 ## Los fallos que encontraron la dirección correcta
 
-Dos direcciones que parecían razonables produjeron una imagen que pasaba la certificación, pero no un recovery funcional. El teléfono ejecutaba el kernel de TWRP y cinco segundos después regresaba a Android. `/proc/last_kmsg` conservó la explicación:
+Tres direcciones que parecían razonables (`0x88f65cac`, derivada `0x88f65830` y `0x88ffeb84`) produjeron una imagen que pasaba la certificación, pero no un recovery funcional. El teléfono ejecutaba el kernel de TWRP y cinco segundos después regresaba a Android. `/proc/last_kmsg` conservó la explicación:
 
 ```text
 INITRD: 0x88f102e0+0x00000800 is not a memory region - disabling initrd
@@ -58,7 +58,7 @@ VFS: Cannot open root device "(null)" or unknown-block(0,0)
 Kernel panic - not syncing: VFS: Unable to mount root fs
 ```
 
-`0x88f102e0` era el ramdisk señuelo de Loki y `0x800` una sola página. El kernel arrancaba, pero el payload no había corregido la cabecera que realmente consumía el flujo final. Ese registro descartó problemas del kernel, del empaquetado de TWRP y de la tabla de particiones; obligó a seguir el valor de `r4` en el camino completo de `boot_linux_from_mmc`.
+`0x88f102e0` era el ramdisk señuelo de Loki —siempre queda 8 bytes antes de `check_sigs`, de ahí que se parezcan tanto— y `0x800` una sola página. El kernel arrancaba, pero el payload no había corregido la cabecera que realmente consumía el flujo final. Ese registro descartó problemas del kernel, del empaquetado de TWRP y de la tabla de particiones; obligó a seguir el valor de `r4` en el camino completo de `boot_linux_from_mmc`.
 
 Con `hdr = 0x88f64aa8`, Loki restauró los valores reales:
 
@@ -76,11 +76,44 @@ ro.twrp.version=3.1.1-0
 ro.build.product=fx3
 ```
 
-La imagen instalada, `twrp_recovery_fx3_v4.lok`, mide 9,261,056 bytes dentro de una partición de 12,582,912 bytes. Antes de reiniciar se leyó nuevamente desde `mmcblk0p18` y se comparó byte por byte. Su SHA-256 es:
+La imagen instalada, `twrp_recovery_fx3_v4.lok`, mide 9 261 056 bytes dentro de una partición de 12 582 912 bytes. Antes de reiniciar se leyó nuevamente desde `mmcblk0p18` y se comparó byte por byte. Su SHA-256 es:
 
 ```text
 c1ce4810d7ee78f64bda486b73fe42708e6a57e2dccb1879823d6fed9ac662dd
 ```
+
+## Cómo reproducirlo
+
+Este es el procedimiento real que seguí. Necesita **root en el teléfono** (`su` por ADB) y un compilador cruzado ARM, porque el `loki_tool` que usé se ejecuta dentro del propio teléfono.
+
+```bash
+# 1. Copias de seguridad: aboot (mmcblk0p5) y recovery (mmcblk0p18, 12 MiB)
+adb shell "su -c 'dd if=/dev/block/mmcblk0p5  of=/data/local/tmp/aboot-live.img bs=524288 count=1'"
+adb shell "su -c 'dd if=/dev/block/mmcblk0p18 of=/data/local/tmp/recovery-live.img bs=1048576 count=12'"
+adb shell "su -c 'chmod 644 /data/local/tmp/*-live.img'"
+adb pull /data/local/tmp/aboot-live.img /data/local/tmp/recovery-live.img .
+
+# 2. Compilar loki_tool con el perfil del P659H (estático, para ARM)
+arm-linux-gnueabi-gcc -static -O2 -o loki_tool_p659 patch_main.c orig_loki_patch.c
+
+# 3. Parchear TWRP en el teléfono, usando su propio aboot
+adb push loki_tool_p659 twrp_recovery_fx3.img /data/local/tmp/
+adb push aboot-live.img /data/local/tmp/aboot-stock.img
+adb shell "chmod 755 /data/local/tmp/loki_tool_p659 && \
+  /data/local/tmp/loki_tool_p659 patch recovery /data/local/tmp/aboot-stock.img \
+  /data/local/tmp/twrp_recovery_fx3.img /data/local/tmp/twrp-fx3.lok"
+
+# 4. Escribir y verificar (9 261 056 bytes = 2261 bloques de 4096)
+adb shell "su -c 'dd if=/data/local/tmp/twrp-fx3.lok of=/dev/block/mmcblk0p18 bs=4096'"
+adb shell "su -c 'dd if=/dev/block/mmcblk0p18 of=/data/local/tmp/readback.bin bs=4096 count=2261'"
+adb shell "su -c 'chmod 644 /data/local/tmp/readback.bin'"; adb pull /data/local/tmp/readback.bin
+sha256sum readback.bin   # debe coincidir con el hash de arriba
+
+# 5. Solo si coincide
+adb reboot recovery
+```
+
+> **Precaución:** escribir a mano en una partición puede dejar el teléfono sin arrancar. Guarda siempre las copias del paso 1, compara el hash antes de reiniciar y no continúes si no coincide. En mi caso Android siguió arrancando porque `boot` no se tocó, y el recovery original se pudo restaurar con el mismo `dd` en cualquier momento.
 
 ## Qué cambia y qué no
 
