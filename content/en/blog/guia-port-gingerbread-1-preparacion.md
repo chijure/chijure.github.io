@@ -46,7 +46,7 @@ I only rebuilt a kernel when it was really needed, as on the C660, where the pre
 Before testing a ROM, a reliable {{< g "recovery" >}}. Without one, every bad test is a phone you have to rescue by other means. With a working recovery you `adb push` the zip, install it, and if something fails you restore the backup. How I tested it in each case:
 
 - Y220: I tried each kernel version as a recovery before booting Android ([TWRP first]({{< relref "y220-twrp-primero.md" >}})).
-- C660: a {{< g "twrp" "TWRP" >}} that fit in 5 MB ([the story]({{< relref "twrp-5mb-c660.md" >}})).
+- C660: a {{< g "twrp" "TWRP" >}} that fit in 5 MB ([the story, in Spanish](/es/blog/twrp-5mb-c660/)).
 
 ## 5. Choosing where to start
 
