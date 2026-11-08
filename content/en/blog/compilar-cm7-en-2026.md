@@ -27,6 +27,20 @@ docker exec -it cm7-builder bash -c 'DEVICE=y210 ./timed_build.sh'
 
 Even so, 2011 code needs tweaks to build on today's host (headers, `javac -source 1.5`, `apriori`). Those changes live in `build/` and belong to the environment, not to any phone.
 
+## The machine
+
+Nothing exotic, a 2014 tower:
+
+| | |
+|---|---|
+| CPU | Intel Core i7-4770S, 4 cores / 8 threads, 3.10 GHz |
+| RAM | 23 GiB |
+| Disk | 256 GB SATA SSD (system and tree share a partition; ~24 GB free of 218) |
+| OS | Ubuntu 24.04.5, kernel 7.0 |
+| Docker | 28.1.1 |
+
+`out/` takes about 11 GB and the ccache another 2.7 GB (15 GB limit). With 8 threads and 23 GiB `-j8` would seem affordable, but with the memory the desktop already uses I build with `-j2` (see point 3). With a warm cache, recent incremental builds take between 90 and 200 seconds.
+
 ## One tree, four phones
 
 The Y210, C660 and E400 share a Qualcomm platform; the Y220 is MediaTek. They all live in **the same checkout**. Each device tree ships a `patches/` directory with `apply-patches.sh` and `revert-patches.sh` for the changes that touch shared projects (`frameworks/base`, `external/*`). Before working on one phone I revert the other phones' patches.
