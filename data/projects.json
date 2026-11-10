@@ -3,8 +3,8 @@
     {
       "name": "LG Optimus Pro C660",
       "summary": {
-        "es": "CyanogenMod 7 (Android 2.3.7) con kernel 2.6.35 propio, teclado QWERTY, cámara y recovery TWRP 3.1.1 ajustado a una partición de solo 5 MB.",
-        "en": "CyanogenMod 7 (Android 2.3.7) with its own 2.6.35 kernel, QWERTY keyboard, camera and a TWRP 3.1.1 recovery squeezed into a 5 MB partition."
+        "es": "CyanogenMod 7 (Android 2.3.7) beta con kernel 2.6.35 propio: llamadas, SMS, datos móviles, Wi-Fi y zona Wi-Fi, teclado QWERTY, cámara y radio FM, más un recovery TWRP 3.1.1 ajustado a una partición de solo 5 MB.",
+        "en": "CyanogenMod 7 (Android 2.3.7) beta with its own 2.6.35 kernel: calls, SMS, mobile data, Wi-Fi and Wi-Fi hotspot, QWERTY keyboard, camera and FM radio, plus a TWRP 3.1.1 recovery squeezed into a 5 MB partition."
       },
       "tags": [
         "CM7",
@@ -13,10 +13,18 @@
         "TWRP"
       ],
       "status": {
-        "es": "En pruebas",
-        "en": "Testing"
+        "es": "Beta",
+        "en": "Beta"
       },
       "links": [
+        {
+          "label": "ROM (XDA)",
+          "href": "https://xdaforums.com/t/rom-unofficial-2-3-7-cyanogenmod-7-for-lg-optimus-pro-c660.4808154/"
+        },
+        {
+          "label": "TWRP (XDA)",
+          "href": "https://xdaforums.com/t/recovery-unofficial-twrp-3-1-1-0-1-for-lg-optimus-pro-c660.4808153/"
+        },
         {
           "label": "Device tree",
           "href": "https://github.com/chijure-android-system-development/android_device_lge_c660"
